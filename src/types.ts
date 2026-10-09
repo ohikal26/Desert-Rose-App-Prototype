@@ -111,7 +111,10 @@ export interface HistoryEntry {
   by: string
   at: string
   note?: string
+  /** For 'assigned': the new owner. */
   to?: string
+  /** For 'assigned': the new due date, when it changed. */
+  due?: string
 }
 
 export interface Problem {

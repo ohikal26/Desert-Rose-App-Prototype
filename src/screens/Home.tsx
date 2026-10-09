@@ -8,7 +8,8 @@ import { useData, type AppData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
 import { RoleSheet } from './RoleSheet'
-import { AreaTag, KindTag, ProblemStatusChip, RunStateChip, RUN_ICON, SafetyChip, type RunState } from '../components/Chips'
+import { RunStateChip, RUN_ICON, type RunState } from '../components/Chips'
+import { ProblemCard } from '../components/ProblemCard'
 import { myChecklists, teamChecklists } from '../lib/checklists'
 import { isActive, shownStatus, sortProblems } from '../lib/problems'
 import { todayKey } from '../lib/dates'
@@ -97,11 +98,11 @@ function EmployeeHome({ me, data }: { me: User; data: AppData }) {
         </div>
       </section>
 
-      <Link to="/problems/new?source=reported" className="btn btn-secondary btn-block">
+      <Link to="/problems/new" className="btn btn-secondary btn-block">
         <Camera size={20} aria-hidden />{t('emp.report')}
       </Link>
 
-      <ProblemPreview title={t('emp.myProblems')} problems={mine} />
+      <ProblemPreview title={t('emp.myProblems')} problems={mine} listLink="/problems?scope=mine" />
     </>
   )
 }
@@ -195,7 +196,7 @@ function AuditorHome({ me, data }: { me: User; data: AppData }) {
           ))}
         </div>
       </section>
-      <ProblemPreview title={t('aud.recent')} problems={found} />
+      <ProblemPreview title={t('aud.recent')} problems={found} listLink="/problems?scope=all" />
     </>
   )
 }
@@ -208,10 +209,10 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
   const active = inScope.filter(isActive)
   const overdue = active.filter((p) => shownStatus(p, today) === 'overdue')
   const tiles = [
-    { label: t('sum.open'), n: active.length, icon: ListChecks, cls: '' },
-    { label: t('sum.overdue'), n: overdue.length, icon: Clock, cls: 'is-critical' },
-    { label: t('sum.safety'), n: active.filter((p) => p.safety).length, icon: AlertTriangle, cls: 'is-critical' },
-    { label: t('sum.fixedWaiting'), n: inScope.filter((p) => p.status === 'fixed').length, icon: Wrench, cls: '' },
+    { label: t('sum.open'), n: active.length, icon: ListChecks, cls: '', q: '' },
+    { label: t('sum.overdue'), n: overdue.length, icon: Clock, cls: 'is-critical', q: '&status=overdue' },
+    { label: t('sum.safety'), n: active.filter((p) => p.safety).length, icon: AlertTriangle, cls: 'is-critical', q: '&safety=1' },
+    { label: t('sum.fixedWaiting'), n: inScope.filter((p) => p.status === 'fixed').length, icon: Wrench, cls: '', q: '&status=fixed' },
   ]
   return (
     <>
@@ -222,7 +223,7 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
         </div>
         <div className="tiles">
           {tiles.map((x) => (
-            <Link key={x.label} to="/soon/5" className="tile">
+            <Link key={x.label} to={`/problems?scope=${me.department === 'all' ? 'all' : 'area'}${x.q}`} className="tile">
               <span className={`tile-number ${x.cls}`}>{x.n}</span>
               <span className="tile-label"><x.icon size={18} aria-hidden />{x.label}</span>
             </Link>
@@ -240,14 +241,13 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
 }
 
 /** Short read-only preview. The full problem list arrives in stage 3. */
-function ProblemPreview({ title, problems }: { title: string; problems: Problem[] }) {
-  const { t, locName, problemTitle, userName } = useI18n()
-  const { location, user } = useData()
+function ProblemPreview({ title, problems, listLink = '/problems' }: { title: string; problems: Problem[]; listLink?: string }) {
+  const { t } = useI18n()
   return (
     <section className="stack" aria-label={title}>
       <div className="section-head">
         <h2>{title}</h2>
-        <Link to="/problems" className="btn-text">
+        <Link to={listLink} className="btn-text">
           {t('problems.count', { n: problems.length })}
           <ChevronRight size={18} aria-hidden className="flip-rtl" />
         </Link>
@@ -256,20 +256,7 @@ function ProblemPreview({ title, problems }: { title: string; problems: Problem[
         <p className="card state-box muted">{t('state.empty')}</p>
       ) : (
         <ul className="list">
-          {problems.slice(0, 3).map((p) => {
-            const loc = location(p.location)
-            return (
-              <li key={p.id} className="card stack-sm">
-                <div className="row">
-                  {p.safety && <SafetyChip />}
-                  <ProblemStatusChip status={shownStatus(p)} />
-                </div>
-                <div className="list-row-title">{problemTitle(p)}</div>
-                <div className="muted small">{locName(loc)} · {userName(user(p.owner))}</div>
-                <div className="row"><KindTag kind={p.kind} /><AreaTag area={p.area} /></div>
-              </li>
-            )
-          })}
+          {problems.slice(0, 3).map((p) => <li key={p.id}><ProblemCard p={p} to={`/problems/${p.id}`} /></li>)}
         </ul>
       )}
     </section>

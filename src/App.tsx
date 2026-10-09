@@ -7,10 +7,13 @@ import { Soon } from './screens/Soon'
 import { StartChecklist } from './screens/StartChecklist'
 import { OpenChecklist } from './screens/OpenChecklist'
 import { ChecklistRun } from './screens/ChecklistRun'
+import { NoProblemSelected, ProblemsLayout } from './screens/Problems'
+import { ProblemDetail } from './screens/ProblemDetail'
+import { NewProblem } from './screens/NewProblem'
 import { useData } from './data/DataContext'
 import { useAppState } from './state/AppState'
 import { useI18n } from './i18n/I18n'
-import { isActive, shownStatus } from './lib/problems'
+import { needsMe } from './lib/problems'
 
 export function App() {
   return (
@@ -20,8 +23,10 @@ export function App() {
   )
 }
 
-// Task screens (a checklist in progress) hide the menu so the main action sits within thumb reach.
-const TASK_SCREENS = /^\/(checklist|checklists)\//
+// Task screens hide the menu so the main action sits at the bottom, within thumb reach.
+const TASK_SCREENS = /^\/(checklist|checklists)\/|^\/problems\/new/
+// A single problem hides the menu on phones only; tablets show it beside the list.
+const DETAIL_SCREENS = /^\/problems\/[^/]+$/
 
 function Frame() {
   const { data, error, user } = useData()
@@ -29,10 +34,11 @@ function Frame() {
   const { userId } = useAppState()
   const { t } = useI18n()
   const me = user(userId)
-  // In-app badge instead of push notifications: my problems that need action.
+  // In-app badge instead of push notifications: problems waiting on me.
   const badge = data && me
-    ? data.problems.filter((p) => p.owner === me.id && isActive(p) && (shownStatus(p) === 'overdue' || p.safety)).length
+    ? data.problems.filter((p) => needsMe(p, me, data.locations.find((l) => l.id === p.location))).length
     : 0
+  const navClass = TASK_SCREENS.test(pathname) ? 'hidden' : DETAIL_SCREENS.test(pathname) ? 'hide-on-phone' : ''
 
   return (
       <div className="app">
@@ -44,16 +50,19 @@ function Frame() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/problems" element={<Soon stageOverride="3" />} />
+              <Route path="/problems" element={<ProblemsLayout />}>
+                <Route index element={<NoProblemSelected />} />
+                <Route path=":id" element={<ProblemDetail />} />
+              </Route>
               <Route path="/soon/:stage" element={<Soon />} />
               <Route path="/checklists/start" element={<StartChecklist />} />
               <Route path="/checklist/open/:locationId/:templateId" element={<OpenChecklist />} />
               <Route path="/checklist/:runId" element={<ChecklistRun />} />
-              <Route path="/problems/new" element={<Soon stageOverride="3" />} />
+              <Route path="/problems/new" element={<NewProblem />} />
             </Routes>
           )}
         </main>
-        {!TASK_SCREENS.test(pathname) && <BottomNav problemBadge={badge} />}
+        {navClass !== 'hidden' && <BottomNav problemBadge={badge} className={navClass} />}
       </div>
   )
 }

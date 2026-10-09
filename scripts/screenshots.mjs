@@ -28,18 +28,22 @@ const shots = [
   { name: 'checklist-review', user: 'hassan', hash: '#/checklist/run-seed-1' },
   { name: 'checklist-sent-back', user: 'hassan', hash: '#/checklist/run-seed-3' },
   { name: 'checklist-employee', user: 'mona', hash: '#/checklist/run-seed-5' },
+  { name: 'problems', user: 'hassan', hash: '#/problems' },
+  { name: 'problem-safety', user: 'tarek', hash: '#/problems/p-06' },
+  { name: 'problem-fixed', user: 'nadia', hash: '#/problems/p-02' },
+  { name: 'problem-new', user: 'karim', hash: '#/problems/new?location=quiet-pool' },
 ]
 const browser = await chromium.launch()
 for (const [sizeName, viewport] of Object.entries(sizes)) {
   for (const lang of ['en', 'ar']) {
     for (const s of shots) {
-      if (sizeName === 'tablet-portrait' && s.name.startsWith('checklist')) continue
-      if (sizeName !== 'phone' && ['settings', 'role-switcher', 'auditor', 'checklist-in-progress', 'checklist-sent-back'].includes(s.name)) continue
+      if (sizeName === 'tablet-portrait' && (s.name.startsWith('checklist') || s.name.startsWith('problem'))) continue
+      if (sizeName !== 'phone' && ['settings', 'role-switcher', 'auditor', 'checklist-in-progress', 'checklist-sent-back', 'problem-fixed', 'problem-new', 'problems'].includes(s.name)) continue
       const ctx = await browser.newContext({ viewport, deviceScaleFactor: 2, serviceWorkers: 'block' })
       await ctx.addInitScript(([l, u]) => { localStorage.setItem('dr.lang', l); localStorage.setItem('dr.user', u) }, [lang, s.user])
       const page = await ctx.newPage()
       await page.goto(`http://localhost:4179/${s.hash ?? ''}`)
-      await page.waitForSelector('h1')
+      await page.locator('h1:visible').first().waitFor()
       if (s.click) await page.locator('.who .btn').click()
       await page.evaluate(() => document.fonts.ready)
       await page.waitForTimeout(300)
