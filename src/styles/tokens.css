@@ -1,0 +1,68 @@
+/* Desert Rose design tokens (brief 10.2–10.4). Hex values from the Brand Manual v1.0. */
+:root {
+  /* Brand */
+  --teal: #007681;
+  --orange: #E05E27;      /* one accent per screen; large text only */
+  --stone: #A44E3A;       /* orange-family text on light backgrounds */
+  --sage: #698272;        /* quiet accents; large text only */
+  --pearl: #E8E3DB;       /* panels, chips, bands; ink text on it */
+  --dusty-pink: #B07C6F;  /* decoration only */
+
+  /* Surfaces and text */
+  --page: #FAF8F4;
+  --card: #FFFFFF;
+  --ink: #1F2A2E;
+  --grey: #5F676B;
+  --hairline: #DDD6CA;
+
+  /* Status */
+  --good: #3F6B52;
+  --warning: #8A5A12;
+  --critical: #B42318;
+
+  /* Tinted backgrounds for status chips (text stays the full status colour) */
+  --good-bg: #E7EFEA;
+  --warning-bg: #F6EBD9;
+  --critical-bg: #FBE7E5;
+  --teal-bg: #E3F0F1;
+
+  /* Type */
+  --font-title: Optima, "Tenor Sans", "Segoe UI", sans-serif;
+  --font-body: "Brandon Text", "Nunito Sans", "Segoe UI", sans-serif;
+  --fs-body: 17px;
+  --fs-label: 15px;
+  --fs-title: 26px;
+  --fs-section: 20px;
+  --fs-number: 40px;
+  --lh: 1.4;
+
+  /* Spacing: 8 px grid */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --gutter: 16px;
+
+  --radius: 12px;
+  --tap: 48px;
+  --tap-item: 64px;
+}
+
+:root[lang="ar"] {
+  --font-title: "Noto Naskh Arabic", "Tenor Sans", serif;
+  --font-body: "IBM Plex Sans Arabic", "Nunito Sans", "Segoe UI", sans-serif;
+  --lh: 1.7;
+}
+
+:root[data-text-size="large"] {
+  --fs-body: 19px;
+  --fs-label: 17px;
+  --fs-title: 28px;
+  --fs-section: 22px;
+  --fs-number: 44px;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 24px; }
+}
