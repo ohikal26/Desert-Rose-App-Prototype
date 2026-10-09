@@ -1,9 +1,8 @@
-import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { BottomNav } from './components/BottomNav'
 import { Home } from './screens/Home'
 import { Settings } from './screens/Settings'
-import { Soon } from './screens/Soon'
 import { StartChecklist } from './screens/StartChecklist'
 import { OpenChecklist } from './screens/OpenChecklist'
 import { ChecklistRun } from './screens/ChecklistRun'
@@ -59,7 +58,6 @@ function Frame() {
                 <Route index element={<NoProblemSelected />} />
                 <Route path=":id" element={<ProblemDetail />} />
               </Route>
-              <Route path="/soon/:stage" element={<Soon />} />
               <Route path="/checklists/start" element={<StartChecklist />} />
               <Route path="/checklist/open/:locationId/:templateId" element={<OpenChecklist />} />
               <Route path="/checklist/:runId" element={<ChecklistRun />} />
@@ -69,6 +67,7 @@ function Frame() {
               <Route path="/inspections/start/:templateId" element={<StartInspection />} />
               <Route path="/inspection/:runId/summary" element={<InspectionSummary />} />
               <Route path="/inspection/:runId/:index?" element={<InspectionRun />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           )}
         </main>

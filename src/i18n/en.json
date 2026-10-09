@@ -80,8 +80,6 @@
   "settings.exportNote": "Coming in the real tool",
   "settings.about": "About this prototype",
   "settings.aboutText": "This is a prototype to show the idea and test it with staff. It uses made-up demo data and keeps everything on this device. There is no real login and no link to other systems.",
-  "soon.title": "Coming in the next stage",
-  "soon.text": "This part of the prototype is built in stage {n}.",
   "state.loading": "Loading…",
   "state.empty": "No problems here. Good work.",
   "state.error": "That didn't save. We'll try again when you're online.",
