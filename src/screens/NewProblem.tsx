@@ -16,7 +16,7 @@ import type { Problem, ProblemKind, User } from '../types'
 
 /** Who can own a problem at a place: people in that place's team. */
 export function ownersFor(users: User[], department?: string): User[] {
-  return users.filter((u) => u.department === department && u.role !== 'gm')
+  return users.filter((u) => u.department === department && !['gm', 'ceo', 'owner'].includes(u.role))
 }
 
 /** Default owner: the supervisor for that place, who can then hand it on. */

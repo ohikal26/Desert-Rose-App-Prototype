@@ -1,156 +1,941 @@
 {
   "_readme": "Demo seed data. All names are made up. Text here is English; every Arabic string lives in src/i18n/ar.json, keyed by the ids below. Dates are days relative to the day the demo data is loaded (0 = today, 1 = tomorrow, -2 = two days ago).",
-
   "users": [
-    { "id": "karim",  "name": "Karim",  "initials": "KA", "role": "employee",   "department": "recreation",   "job": "Pool attendant",          "locations": ["quiet-pool", "towel-quiet-pool"] },
-    { "id": "mona",   "name": "Mona",   "initials": "MO", "role": "employee",   "department": "housekeeping", "job": "Room attendant",          "locations": ["building-5000", "room-5212", "room-5108", "room-5301"] },
-    { "id": "hassan", "name": "Hassan", "initials": "HA", "role": "supervisor", "department": "recreation",   "job": "Recreation supervisor" },
-    { "id": "nadia",  "name": "Nadia",  "initials": "NA", "role": "supervisor", "department": "housekeeping", "job": "Housekeeping supervisor" },
-    { "id": "sara",   "name": "Sara",   "initials": "SA", "role": "auditor",    "department": "oe",           "job": "Quality auditor" },
-    { "id": "tarek",  "name": "Tarek",  "initials": "TA", "role": "head",       "department": "recreation",   "job": "Recreation manager" },
-    { "id": "laila",  "name": "Laila",  "initials": "LA", "role": "head",       "department": "housekeeping", "job": "Housekeeping manager" },
-    { "id": "samir",  "name": "Samir",  "initials": "SM", "role": "gm",         "department": "all",          "job": "General manager" }
+    {
+      "id": "karim",
+      "name": "Karim",
+      "initials": "KA",
+      "role": "employee",
+      "department": "recreation",
+      "job": "Pool attendant",
+      "locations": [
+        "quiet-pool",
+        "towel-quiet-pool"
+      ]
+    },
+    {
+      "id": "mona",
+      "name": "Mona",
+      "initials": "MO",
+      "role": "employee",
+      "department": "housekeeping",
+      "job": "Room attendant",
+      "locations": [
+        "building-5000",
+        "room-5212",
+        "room-5108",
+        "room-5301"
+      ]
+    },
+    {
+      "id": "hassan",
+      "name": "Hassan",
+      "initials": "HA",
+      "role": "supervisor",
+      "department": "recreation",
+      "job": "Recreation supervisor"
+    },
+    {
+      "id": "nadia",
+      "name": "Nadia",
+      "initials": "NA",
+      "role": "supervisor",
+      "department": "housekeeping",
+      "job": "Housekeeping supervisor"
+    },
+    {
+      "id": "sara",
+      "name": "Sara",
+      "initials": "SA",
+      "role": "auditor",
+      "department": "oe",
+      "job": "Quality auditor"
+    },
+    {
+      "id": "tarek",
+      "name": "Tarek",
+      "initials": "TA",
+      "role": "head",
+      "department": "recreation",
+      "job": "Recreation manager"
+    },
+    {
+      "id": "laila",
+      "name": "Laila",
+      "initials": "LA",
+      "role": "head",
+      "department": "housekeeping",
+      "job": "Housekeeping manager"
+    },
+    {
+      "id": "samir",
+      "name": "Samir",
+      "initials": "SM",
+      "role": "gm",
+      "department": "all",
+      "job": "General manager"
+    },
+    {
+      "id": "ceo",
+      "name": "CEO",
+      "initials": "CE",
+      "role": "ceo",
+      "department": "all",
+      "job": "Chief executive"
+    },
+    {
+      "id": "owner",
+      "name": "Owner",
+      "initials": "OW",
+      "role": "owner",
+      "department": "all",
+      "job": "Owner's representative"
+    }
   ],
-
   "recreationLocations": [
-    { "id": "quiet-pool",       "name": "Quiet Pool",                 "type": "pool" },
-    { "id": "activities-pool",  "name": "Activities Pool",            "type": "pool" },
-    { "id": "aqua-park",        "name": "Aqua Park",                  "type": "aquapark" },
-    { "id": "zaitouna-pool",    "name": "Zaitouna Pool",              "type": "pool" },
-    { "id": "beach-lagoon",     "name": "Beach (Lagoon)",             "type": "beach" },
-    { "id": "beach-open-sea",   "name": "Beach (Open Sea)",           "type": "beach" },
-    { "id": "towel-quiet-pool", "name": "Towel Centre (Quiet Pool)",  "type": "towel" },
-    { "id": "towel-beach",      "name": "Towel Centre (Beach)",       "type": "towel" }
+    {
+      "id": "quiet-pool",
+      "name": "Quiet Pool",
+      "type": "pool"
+    },
+    {
+      "id": "activities-pool",
+      "name": "Activities Pool",
+      "type": "pool"
+    },
+    {
+      "id": "aqua-park",
+      "name": "Aqua Park",
+      "type": "aquapark"
+    },
+    {
+      "id": "zaitouna-pool",
+      "name": "Zaitouna Pool",
+      "type": "pool"
+    },
+    {
+      "id": "beach-lagoon",
+      "name": "Beach (Lagoon)",
+      "type": "beach"
+    },
+    {
+      "id": "beach-open-sea",
+      "name": "Beach (Open Sea)",
+      "type": "beach"
+    },
+    {
+      "id": "towel-quiet-pool",
+      "name": "Towel Centre (Quiet Pool)",
+      "type": "towel"
+    },
+    {
+      "id": "towel-beach",
+      "name": "Towel Centre (Beach)",
+      "type": "towel"
+    }
   ],
-
   "housekeeping": {
     "_note": "Old buildings are a demo assumption, to be confirmed by Desert Rose (brief 5.2). Rooms are generated: building digit + floor + two-digit room, e.g. 4216.",
-    "buildings": [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
-    "oldBuildings": [1000, 4000, 6000],
-    "floors": [1, 2, 3],
+    "buildings": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000,
+      6000,
+      7000,
+      8000
+    ],
+    "oldBuildings": [
+      1000,
+      4000,
+      6000
+    ],
+    "floors": [
+      1,
+      2,
+      3
+    ],
     "roomsPerFloor": 24,
     "otherLocations": [
-      { "id": "hk-stores",         "name": "HK stores",              "type": "hk-area", "old": false },
-      { "id": "laundry-handover",  "name": "Laundry handover point", "type": "hk-area", "old": false }
+      {
+        "id": "hk-stores",
+        "name": "HK stores",
+        "type": "hk-area",
+        "old": false
+      },
+      {
+        "id": "laundry-handover",
+        "name": "Laundry handover point",
+        "type": "hk-area",
+        "old": false
+      }
     ]
   },
-
   "checklistTemplates": [
-    { "id": "pool-opening", "department": "recreation", "locationTypes": ["pool"], "shift": "morning", "name": "Pool opening",
+    {
+      "id": "pool-opening",
+      "department": "recreation",
+      "locationTypes": [
+        "pool"
+      ],
+      "shift": "morning",
+      "name": "Pool opening",
       "items": [
-        { "id": "pool-opening-1", "text": "Lifeguard in the chair before the first guest arrives" },
-        { "id": "pool-opening-2", "text": "Lifebuoy, rescue tube and first aid bag in place and complete" },
-        { "id": "pool-opening-3", "text": "Water clear; skim the surface and empty the skimmer baskets" },
-        { "id": "pool-opening-4", "text": "Water test done and written down (chlorine and pH), within the limits on the board" },
-        { "id": "pool-opening-5", "text": "Foot basin and shower working and clean" },
-        { "id": "pool-opening-6", "text": "Drains and grids free from algae" },
-        { "id": "pool-opening-7", "text": "Pool rules and depth signs in place and readable" }
-      ] },
-    { "id": "towel-opening", "department": "recreation", "locationTypes": ["towel"], "shift": "morning", "name": "Towel centre",
+        {
+          "id": "pool-opening-1",
+          "text": "Lifeguard in the chair before the first guest arrives"
+        },
+        {
+          "id": "pool-opening-2",
+          "text": "Lifebuoy, rescue tube and first aid bag in place and complete"
+        },
+        {
+          "id": "pool-opening-3",
+          "text": "Water clear; skim the surface and empty the skimmer baskets"
+        },
+        {
+          "id": "pool-opening-4",
+          "text": "Water test done and written down (chlorine and pH), within the limits on the board"
+        },
+        {
+          "id": "pool-opening-5",
+          "text": "Foot basin and shower working and clean"
+        },
+        {
+          "id": "pool-opening-6",
+          "text": "Drains and grids free from algae"
+        },
+        {
+          "id": "pool-opening-7",
+          "text": "Pool rules and depth signs in place and readable"
+        }
+      ]
+    },
+    {
+      "id": "towel-opening",
+      "department": "recreation",
+      "locationTypes": [
+        "towel"
+      ],
+      "shift": "morning",
+      "name": "Towel centre",
       "items": [
-        { "id": "towel-opening-1", "text": "Towel stock counted and written in the log book" },
-        { "id": "towel-opening-2", "text": "One towel per towel card" },
-        { "id": "towel-opening-3", "text": "Clean and used towels kept on separate trolleys" },
-        { "id": "towel-opening-4", "text": "Counter tidy and staffed from opening time" }
-      ] },
-    { "id": "aquapark-opening", "department": "recreation", "locationTypes": ["aquapark"], "shift": "morning", "name": "Aqua Park opening",
+        {
+          "id": "towel-opening-1",
+          "text": "Towel stock counted and written in the log book"
+        },
+        {
+          "id": "towel-opening-2",
+          "text": "One towel per towel card"
+        },
+        {
+          "id": "towel-opening-3",
+          "text": "Clean and used towels kept on separate trolleys"
+        },
+        {
+          "id": "towel-opening-4",
+          "text": "Counter tidy and staffed from opening time"
+        }
+      ]
+    },
+    {
+      "id": "aquapark-opening",
+      "department": "recreation",
+      "locationTypes": [
+        "aquapark"
+      ],
+      "shift": "morning",
+      "name": "Aqua Park opening",
       "items": [
-        { "id": "aquapark-opening-1", "text": "Lifeguard and beach boys in place; nobody leaves without a replacement" },
-        { "id": "aquapark-opening-2", "text": "Slides, towers, stairs and ladders checked: clean, safe, nothing loose" },
-        { "id": "aquapark-opening-3", "text": "Anti-slip mats in place" },
-        { "id": "aquapark-opening-4", "text": "Height rule sign in place (minimum 120 cm)" },
-        { "id": "aquapark-opening-5", "text": "Music, instruction boards and floaters ready" }
-      ] },
-    { "id": "beach-opening", "department": "recreation", "locationTypes": ["beach"], "shift": "morning", "name": "Beach opening",
+        {
+          "id": "aquapark-opening-1",
+          "text": "Lifeguard and beach boys in place; nobody leaves without a replacement"
+        },
+        {
+          "id": "aquapark-opening-2",
+          "text": "Slides, towers, stairs and ladders checked: clean, safe, nothing loose"
+        },
+        {
+          "id": "aquapark-opening-3",
+          "text": "Anti-slip mats in place"
+        },
+        {
+          "id": "aquapark-opening-4",
+          "text": "Height rule sign in place (minimum 120 cm)"
+        },
+        {
+          "id": "aquapark-opening-5",
+          "text": "Music, instruction boards and floaters ready"
+        }
+      ]
+    },
+    {
+      "id": "beach-opening",
+      "department": "recreation",
+      "locationTypes": [
+        "beach"
+      ],
+      "shift": "morning",
+      "name": "Beach opening",
       "items": [
-        { "id": "beach-opening-1", "text": "Lifeguard in the tower before the first guest arrives" },
-        { "id": "beach-opening-2", "text": "Rescue board, lifebuoy and first aid bag in place and complete" },
-        { "id": "beach-opening-3", "text": "Swimming zone buoys and flags in place; today's flag colour set" },
-        { "id": "beach-opening-4", "text": "Sand raked and free from glass, cans and sharp objects" },
-        { "id": "beach-opening-5", "text": "Sunbeds, umbrellas and tables lined up and clean" },
-        { "id": "beach-opening-6", "text": "Beach rules and sea warning signs in place and readable" }
-      ] },
-    { "id": "room-attendant-start", "department": "housekeeping", "locationTypes": ["building"], "shift": "morning", "name": "Room attendant, start of shift",
+        {
+          "id": "beach-opening-1",
+          "text": "Lifeguard in the tower before the first guest arrives"
+        },
+        {
+          "id": "beach-opening-2",
+          "text": "Rescue board, lifebuoy and first aid bag in place and complete"
+        },
+        {
+          "id": "beach-opening-3",
+          "text": "Swimming zone buoys and flags in place; today's flag colour set"
+        },
+        {
+          "id": "beach-opening-4",
+          "text": "Sand raked and free from glass, cans and sharp objects"
+        },
+        {
+          "id": "beach-opening-5",
+          "text": "Sunbeds, umbrellas and tables lined up and clean"
+        },
+        {
+          "id": "beach-opening-6",
+          "text": "Beach rules and sea warning signs in place and readable"
+        }
+      ]
+    },
+    {
+      "id": "room-attendant-start",
+      "department": "housekeeping",
+      "locationTypes": [
+        "building"
+      ],
+      "shift": "morning",
+      "name": "Room attendant, start of shift",
       "items": [
-        { "id": "room-attendant-start-1", "text": "Trolley stocked and sorted; clean linen on the top shelves only" },
-        { "id": "room-attendant-start-2", "text": "Colour-coded cloths ready (one colour for bathroom, one for room)" },
-        { "id": "room-attendant-start-3", "text": "Chemicals labelled and diluted correctly" },
-        { "id": "room-attendant-start-4", "text": "Room order for today checked with the supervisor" },
-        { "id": "room-attendant-start-5", "text": "Lost and found bag on the trolley" }
-      ] },
-    { "id": "vacant-room-ready", "department": "housekeeping", "locationTypes": ["room"], "shift": "morning", "name": "Vacant room ready",
+        {
+          "id": "room-attendant-start-1",
+          "text": "Trolley stocked and sorted; clean linen on the top shelves only"
+        },
+        {
+          "id": "room-attendant-start-2",
+          "text": "Colour-coded cloths ready (one colour for bathroom, one for room)"
+        },
+        {
+          "id": "room-attendant-start-3",
+          "text": "Chemicals labelled and diluted correctly"
+        },
+        {
+          "id": "room-attendant-start-4",
+          "text": "Room order for today checked with the supervisor"
+        },
+        {
+          "id": "room-attendant-start-5",
+          "text": "Lost and found bag on the trolley"
+        }
+      ]
+    },
+    {
+      "id": "vacant-room-ready",
+      "department": "housekeeping",
+      "locationTypes": [
+        "room"
+      ],
+      "shift": "morning",
+      "name": "Vacant room ready",
       "items": [
-        { "id": "vacant-room-ready-1", "text": "Bathroom cleaned, sanitised and fully supplied" },
-        { "id": "vacant-room-ready-2", "text": "Drains open and clean" },
-        { "id": "vacant-room-ready-3", "text": "Kettle, cups and tea and coffee tray clean and full" },
-        { "id": "vacant-room-ready-4", "text": "A/C grill dust-free; A/C working" },
-        { "id": "vacant-room-ready-5", "text": "Minibar clean and filled" },
-        { "id": "vacant-room-ready-6", "text": "Safe box checked, cleaned and left open" },
-        { "id": "vacant-room-ready-7", "text": "Curtains clean, with no stains" },
-        { "id": "vacant-room-ready-8", "text": "Dusting done, behind and under the bed too" }
-      ] },
-    { "id": "hk-stores-opening", "department": "housekeeping", "locationTypes": ["hk-area"], "shift": "morning", "name": "HK stores and handover",
+        {
+          "id": "vacant-room-ready-1",
+          "text": "Bathroom cleaned, sanitised and fully supplied"
+        },
+        {
+          "id": "vacant-room-ready-2",
+          "text": "Drains open and clean"
+        },
+        {
+          "id": "vacant-room-ready-3",
+          "text": "Kettle, cups and tea and coffee tray clean and full"
+        },
+        {
+          "id": "vacant-room-ready-4",
+          "text": "A/C grill dust-free; A/C working"
+        },
+        {
+          "id": "vacant-room-ready-5",
+          "text": "Minibar clean and filled"
+        },
+        {
+          "id": "vacant-room-ready-6",
+          "text": "Safe box checked, cleaned and left open"
+        },
+        {
+          "id": "vacant-room-ready-7",
+          "text": "Curtains clean, with no stains"
+        },
+        {
+          "id": "vacant-room-ready-8",
+          "text": "Dusting done, behind and under the bed too"
+        }
+      ]
+    },
+    {
+      "id": "hk-stores-opening",
+      "department": "housekeeping",
+      "locationTypes": [
+        "hk-area"
+      ],
+      "shift": "morning",
+      "name": "HK stores and handover",
       "items": [
-        { "id": "hk-stores-opening-1", "text": "Linen counted in and out and written in the log book" },
-        { "id": "hk-stores-opening-2", "text": "Clean and used linen kept apart" },
-        { "id": "hk-stores-opening-3", "text": "Chemicals stored on their own shelf, labelled and closed" },
-        { "id": "hk-stores-opening-4", "text": "Floor clear and dry; nothing stored on the floor" },
-        { "id": "hk-stores-opening-5", "text": "Guest supplies stock checked and low items reported" }
-      ] }
+        {
+          "id": "hk-stores-opening-1",
+          "text": "Linen counted in and out and written in the log book"
+        },
+        {
+          "id": "hk-stores-opening-2",
+          "text": "Clean and used linen kept apart"
+        },
+        {
+          "id": "hk-stores-opening-3",
+          "text": "Chemicals stored on their own shelf, labelled and closed"
+        },
+        {
+          "id": "hk-stores-opening-4",
+          "text": "Floor clear and dry; nothing stored on the floor"
+        },
+        {
+          "id": "hk-stores-opening-5",
+          "text": "Guest supplies stock checked and low items reported"
+        }
+      ]
+    }
   ],
-
   "inspectionTemplates": [
-    { "id": "pool-inspection", "department": "recreation", "locationTypes": ["pool", "aquapark"], "name": "Pool inspection",
+    {
+      "id": "pool-inspection",
+      "department": "recreation",
+      "locationTypes": [
+        "pool",
+        "aquapark"
+      ],
+      "name": "Pool inspection",
       "items": [
-        { "id": "pool-insp-1", "text": "Lifeguard in position and alert" },
-        { "id": "pool-insp-2", "text": "Rescue equipment complete" },
-        { "id": "pool-insp-3", "text": "Water clarity" },
-        { "id": "pool-insp-4", "text": "Water test records up to date" },
-        { "id": "pool-insp-5", "text": "Drains and grids" },
-        { "id": "pool-insp-6", "text": "Foot basin and shower" },
-        { "id": "pool-insp-7", "text": "Sunbeds, tables and umbrellas" },
-        { "id": "pool-insp-8", "text": "Floor free from hazards" }
-      ] },
-    { "id": "room-inspection", "department": "housekeeping", "locationTypes": ["room"], "name": "Vacant room inspection",
+        {
+          "id": "pool-insp-1",
+          "text": "Lifeguard in position and alert"
+        },
+        {
+          "id": "pool-insp-2",
+          "text": "Rescue equipment complete"
+        },
+        {
+          "id": "pool-insp-3",
+          "text": "Water clarity"
+        },
+        {
+          "id": "pool-insp-4",
+          "text": "Water test records up to date"
+        },
+        {
+          "id": "pool-insp-5",
+          "text": "Drains and grids"
+        },
+        {
+          "id": "pool-insp-6",
+          "text": "Foot basin and shower"
+        },
+        {
+          "id": "pool-insp-7",
+          "text": "Sunbeds, tables and umbrellas"
+        },
+        {
+          "id": "pool-insp-8",
+          "text": "Floor free from hazards"
+        }
+      ]
+    },
+    {
+      "id": "room-inspection",
+      "department": "housekeeping",
+      "locationTypes": [
+        "room"
+      ],
+      "name": "Vacant room inspection",
       "items": [
-        { "id": "room-insp-1",  "text": "Entrance and door" },
-        { "id": "room-insp-2",  "text": "Bathroom" },
-        { "id": "room-insp-3",  "text": "Drains" },
-        { "id": "room-insp-4",  "text": "Kettle and tray" },
-        { "id": "room-insp-5",  "text": "A/C grill" },
-        { "id": "room-insp-6",  "text": "Minibar" },
-        { "id": "room-insp-7",  "text": "Safe box" },
-        { "id": "room-insp-8",  "text": "Curtains" },
-        { "id": "room-insp-9",  "text": "Dusting" },
-        { "id": "room-insp-10", "text": "Bed and linen" }
-      ] }
+        {
+          "id": "room-insp-1",
+          "text": "Entrance and door"
+        },
+        {
+          "id": "room-insp-2",
+          "text": "Bathroom"
+        },
+        {
+          "id": "room-insp-3",
+          "text": "Drains"
+        },
+        {
+          "id": "room-insp-4",
+          "text": "Kettle and tray"
+        },
+        {
+          "id": "room-insp-5",
+          "text": "A/C grill"
+        },
+        {
+          "id": "room-insp-6",
+          "text": "Minibar"
+        },
+        {
+          "id": "room-insp-7",
+          "text": "Safe box"
+        },
+        {
+          "id": "room-insp-8",
+          "text": "Curtains"
+        },
+        {
+          "id": "room-insp-9",
+          "text": "Dusting"
+        },
+        {
+          "id": "room-insp-10",
+          "text": "Bed and linen"
+        }
+      ]
+    }
   ],
-
   "checklistRuns": [
-    { "id": "run-seed-1", "template": "pool-opening",     "location": "activities-pool", "day": 0, "by": "hassan", "state": "done",        "doneItems": 7, "submittedHour": 8 },
-    { "id": "run-seed-2", "template": "aquapark-opening", "location": "aqua-park",       "day": 0, "by": "hassan", "state": "in-progress", "doneItems": 3 },
-    { "id": "run-seed-3", "template": "beach-opening",    "location": "beach-lagoon",    "day": 0, "by": "hassan", "state": "sent-back",   "doneItems": 6, "submittedHour": 7, "sendBackNote": "Please check the rescue board again" },
-    { "id": "run-seed-4", "template": "room-attendant-start", "location": "building-3000", "day": 0, "by": "nadia", "state": "done",      "doneItems": 5, "submittedHour": 8 },
-    { "id": "run-seed-5", "template": "vacant-room-ready", "location": "room-2114",      "day": 0, "by": "nadia", "state": "in-progress", "doneItems": 4 }
+    {
+      "id": "run-seed-1",
+      "template": "pool-opening",
+      "location": "activities-pool",
+      "day": 0,
+      "by": "hassan",
+      "state": "done",
+      "doneItems": 7,
+      "submittedHour": 8
+    },
+    {
+      "id": "run-seed-2",
+      "template": "aquapark-opening",
+      "location": "aqua-park",
+      "day": 0,
+      "by": "hassan",
+      "state": "in-progress",
+      "doneItems": 3
+    },
+    {
+      "id": "run-seed-3",
+      "template": "beach-opening",
+      "location": "beach-lagoon",
+      "day": 0,
+      "by": "hassan",
+      "state": "sent-back",
+      "doneItems": 6,
+      "submittedHour": 7,
+      "sendBackNote": "Please check the rescue board again"
+    },
+    {
+      "id": "run-seed-4",
+      "template": "room-attendant-start",
+      "location": "building-3000",
+      "day": 0,
+      "by": "nadia",
+      "state": "done",
+      "doneItems": 5,
+      "submittedHour": 8
+    },
+    {
+      "id": "run-seed-5",
+      "template": "vacant-room-ready",
+      "location": "room-2114",
+      "day": 0,
+      "by": "nadia",
+      "state": "in-progress",
+      "doneItems": 4
+    }
   ],
-
   "problems": [
-    { "id": "p-01", "title": "Dust on the A/C grill",            "location": "room-5212",          "kind": "care",      "status": "open",          "dueDay": 1,  "createdDay": 0,  "owner": "mona",   "createdBy": "sara",   "source": "inspection" },
-    { "id": "p-02", "title": "Stain on the curtain",             "location": "room-3103",          "kind": "care",      "status": "fixed",         "dueDay": 0,  "createdDay": -2, "owner": "mona",   "createdBy": "nadia",  "source": "checklist", "fixedDay": 0 },
-    { "id": "p-03", "title": "Rust on the kettle screw",         "location": "room-4121",          "kind": "condition", "status": "open",          "dueDay": 3,  "createdDay": -1, "owner": "nadia",  "createdBy": "sara",   "source": "inspection" },
-    { "id": "p-04", "title": "Broken remote control",            "location": "room-6207",          "kind": "condition", "status": "open",          "dueDay": -2, "createdDay": -5, "owner": "nadia",  "createdBy": "mona",   "source": "reported" },
-    { "id": "p-05", "title": "Moisture marks on the wall",       "location": "corridor-1000",      "kind": "condition", "status": "capex",         "dueDay": 14, "createdDay": -12,"owner": "laila",  "createdBy": "sara",   "source": "inspection" },
-    { "id": "p-06", "title": "Broken tiles inside the pool",     "location": "zaitouna-pool",      "kind": "condition", "status": "open",          "dueDay": 2,  "createdDay": -1, "owner": "tarek",  "createdBy": "sara",   "source": "inspection", "safety": true, "interim": "Area roped off" },
-    { "id": "p-07", "title": "Algae on a drain grid",            "location": "aqua-park",          "kind": "care",      "status": "open",          "dueDay": 1,  "createdDay": 0,  "owner": "hassan", "createdBy": "hassan", "source": "checklist" },
-    { "id": "p-08", "title": "Uneven floor near the ladder",     "location": "quiet-pool",         "kind": "condition", "status": "open",          "dueDay": -3, "createdDay": -9, "owner": "tarek",  "createdBy": "sara",   "source": "inspection", "safety": true, "interim": "Warning sign placed; ladder side closed" },
-    { "id": "p-09", "title": "Log book not filled in",           "location": "towel-beach",        "kind": "care",      "status": "closed",        "dueDay": -4, "createdDay": -6, "owner": "karim",  "createdBy": "hassan", "source": "checklist", "fixedDay": -5, "confirmedBy": "hassan", "confirmedDay": -5 },
-    { "id": "p-10", "title": "Shower head leaking",              "location": "activities-pool",    "kind": "condition", "status": "open",          "dueDay": 2,  "createdDay": -1, "owner": "hassan", "createdBy": "karim",  "source": "reported" },
-    { "id": "p-11", "title": "Umbrella torn",                    "location": "beach-open-sea",     "kind": "condition", "status": "open",          "dueDay": -1, "createdDay": -4, "owner": "hassan", "createdBy": "sara",   "source": "inspection" },
-    { "id": "p-12", "title": "Glass found in the sand",          "location": "beach-lagoon",       "kind": "care",      "status": "fixed",         "dueDay": 0,  "createdDay": 0,  "owner": "karim",  "createdBy": "hassan", "source": "checklist", "safety": true, "interim": "Area raked and checked by hand", "fixedDay": 0 },
-    { "id": "p-13", "title": "Minibar not refilled",             "location": "room-2114",          "kind": "care",      "status": "open",          "dueDay": 0,  "createdDay": 0,  "owner": "mona",   "createdBy": "nadia",  "source": "checklist" },
-    { "id": "p-14", "title": "Bathroom door does not close",     "location": "room-1105",          "kind": "condition", "status": "open",          "dueDay": 4,  "createdDay": -2, "owner": "laila",  "createdBy": "mona",   "source": "reported" },
-    { "id": "p-15", "title": "Hair in the shower drain",         "location": "room-7310",          "kind": "care",      "status": "open",          "dueDay": 1,  "createdDay": 0,  "owner": "mona",   "createdBy": "sara",   "source": "inspection" },
-    { "id": "p-16", "title": "Dust on the A/C grill",            "location": "room-5212",          "kind": "care",      "status": "closed",        "dueDay": -18,"createdDay": -20,"owner": "mona",   "createdBy": "sara",   "source": "inspection", "fixedDay": -19, "confirmedBy": "nadia", "confirmedDay": -19 },
-    { "id": "p-17", "title": "Chlorine reading not written down","location": "quiet-pool",         "kind": "care",      "status": "open",          "dueDay": 1,  "createdDay": 0,  "owner": "karim",  "createdBy": "hassan", "source": "checklist" }
-  ]
+    {
+      "id": "p-01",
+      "title": "Dust on the A/C grill",
+      "location": "room-5212",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 1,
+      "createdDay": 0,
+      "owner": "mona",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-02",
+      "title": "Stain on the curtain",
+      "location": "room-3103",
+      "kind": "care",
+      "status": "fixed",
+      "dueDay": 0,
+      "createdDay": -2,
+      "owner": "mona",
+      "createdBy": "nadia",
+      "source": "checklist",
+      "fixedDay": 0
+    },
+    {
+      "id": "p-03",
+      "title": "Rust on the kettle screw",
+      "location": "room-4121",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": 3,
+      "createdDay": -1,
+      "owner": "nadia",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-04",
+      "title": "Broken remote control",
+      "location": "room-6207",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": -2,
+      "createdDay": -5,
+      "owner": "nadia",
+      "createdBy": "mona",
+      "source": "reported"
+    },
+    {
+      "id": "p-05",
+      "title": "Moisture marks on the wall",
+      "location": "corridor-1000",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 14,
+      "createdDay": -12,
+      "owner": "laila",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-06",
+      "title": "Broken tiles inside the pool",
+      "location": "zaitouna-pool",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": 2,
+      "createdDay": -1,
+      "owner": "tarek",
+      "createdBy": "sara",
+      "source": "inspection",
+      "safety": true,
+      "interim": "Area roped off"
+    },
+    {
+      "id": "p-07",
+      "title": "Algae on a drain grid",
+      "location": "aqua-park",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 1,
+      "createdDay": 0,
+      "owner": "hassan",
+      "createdBy": "hassan",
+      "source": "checklist"
+    },
+    {
+      "id": "p-08",
+      "title": "Uneven floor near the ladder",
+      "location": "quiet-pool",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": -3,
+      "createdDay": -9,
+      "owner": "tarek",
+      "createdBy": "sara",
+      "source": "inspection",
+      "safety": true,
+      "interim": "Warning sign placed; ladder side closed"
+    },
+    {
+      "id": "p-09",
+      "title": "Log book not filled in",
+      "location": "towel-beach",
+      "kind": "care",
+      "status": "closed",
+      "dueDay": -4,
+      "createdDay": -6,
+      "owner": "karim",
+      "createdBy": "hassan",
+      "source": "checklist",
+      "fixedDay": -5,
+      "confirmedBy": "hassan",
+      "confirmedDay": -5
+    },
+    {
+      "id": "p-10",
+      "title": "Shower head leaking",
+      "location": "activities-pool",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": 2,
+      "createdDay": -1,
+      "owner": "hassan",
+      "createdBy": "karim",
+      "source": "reported"
+    },
+    {
+      "id": "p-11",
+      "title": "Umbrella torn",
+      "location": "beach-open-sea",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": -1,
+      "createdDay": -4,
+      "owner": "hassan",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-12",
+      "title": "Glass found in the sand",
+      "location": "beach-lagoon",
+      "kind": "care",
+      "status": "fixed",
+      "dueDay": 0,
+      "createdDay": 0,
+      "owner": "karim",
+      "createdBy": "hassan",
+      "source": "checklist",
+      "safety": true,
+      "interim": "Area raked and checked by hand",
+      "fixedDay": 0
+    },
+    {
+      "id": "p-13",
+      "title": "Minibar not refilled",
+      "location": "room-2114",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 0,
+      "createdDay": 0,
+      "owner": "mona",
+      "createdBy": "nadia",
+      "source": "checklist"
+    },
+    {
+      "id": "p-14",
+      "title": "Bathroom door does not close",
+      "location": "room-1105",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": 4,
+      "createdDay": -2,
+      "owner": "laila",
+      "createdBy": "mona",
+      "source": "reported"
+    },
+    {
+      "id": "p-15",
+      "title": "Hair in the shower drain",
+      "location": "room-7310",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 1,
+      "createdDay": 0,
+      "owner": "mona",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-16",
+      "title": "Dust on the A/C grill",
+      "location": "room-5212",
+      "kind": "care",
+      "status": "closed",
+      "dueDay": -18,
+      "createdDay": -20,
+      "owner": "mona",
+      "createdBy": "sara",
+      "source": "inspection",
+      "fixedDay": -19,
+      "confirmedBy": "nadia",
+      "confirmedDay": -19
+    },
+    {
+      "id": "p-17",
+      "title": "Chlorine reading not written down",
+      "location": "quiet-pool",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 1,
+      "createdDay": 0,
+      "owner": "karim",
+      "createdBy": "hassan",
+      "source": "checklist"
+    },
+    {
+      "id": "p-18",
+      "title": "Cracked floor tiles in the bathroom",
+      "location": "room-4108",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 30,
+      "createdDay": -26,
+      "owner": "laila",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-19",
+      "title": "A/C unit noisy and leaking",
+      "location": "room-6115",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 30,
+      "createdDay": -19,
+      "owner": "laila",
+      "createdBy": "nadia",
+      "source": "reported"
+    },
+    {
+      "id": "p-20",
+      "title": "Window frame corroded",
+      "location": "room-1214",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 30,
+      "createdDay": -15,
+      "owner": "laila",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-21",
+      "title": "Balcony door does not seal",
+      "location": "room-6302",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 30,
+      "createdDay": -8,
+      "owner": "laila",
+      "createdBy": "mona",
+      "source": "reported"
+    },
+    {
+      "id": "p-22",
+      "title": "Bathroom extractor fan not working",
+      "location": "room-1118",
+      "kind": "condition",
+      "status": "capex",
+      "dueDay": 30,
+      "createdDay": -4,
+      "owner": "laila",
+      "createdBy": "nadia",
+      "source": "reported"
+    }
+  ],
+  "leadershipHistory": {
+    "_note": "Made-up weekly history for the leadership trends: one row per past week, oldest first (week -8 to week -1). The current week is worked out live from the app's data. Rates are out of 10 inspection items.",
+    "weeks": [
+      {
+        "week": -8,
+        "open": 26,
+        "overdue": 8,
+        "safetyOpen": 3,
+        "closed": 18,
+        "closedOnTime": 13,
+        "stepsIn10": 8.6,
+        "resultGoodIn10": 7.1,
+        "oldPer100": 2.0,
+        "renovatedPer100": 0.7
+      },
+      {
+        "week": -7,
+        "open": 24,
+        "overdue": 9,
+        "safetyOpen": 2,
+        "closed": 20,
+        "closedOnTime": 15,
+        "stepsIn10": 8.8,
+        "resultGoodIn10": 7.2,
+        "oldPer100": 2.1,
+        "renovatedPer100": 0.8
+      },
+      {
+        "week": -6,
+        "open": 25,
+        "overdue": 7,
+        "safetyOpen": 4,
+        "closed": 17,
+        "closedOnTime": 13,
+        "stepsIn10": 8.7,
+        "resultGoodIn10": 7.4,
+        "oldPer100": 1.9,
+        "renovatedPer100": 0.8
+      },
+      {
+        "week": -5,
+        "open": 22,
+        "overdue": 7,
+        "safetyOpen": 3,
+        "closed": 21,
+        "closedOnTime": 17,
+        "stepsIn10": 9.0,
+        "resultGoodIn10": 7.6,
+        "oldPer100": 1.8,
+        "renovatedPer100": 0.9
+      },
+      {
+        "week": -4,
+        "open": 20,
+        "overdue": 6,
+        "safetyOpen": 2,
+        "closed": 19,
+        "closedOnTime": 16,
+        "stepsIn10": 9.1,
+        "resultGoodIn10": 7.8,
+        "oldPer100": 1.7,
+        "renovatedPer100": 0.9
+      },
+      {
+        "week": -3,
+        "open": 19,
+        "overdue": 5,
+        "safetyOpen": 3,
+        "closed": 22,
+        "closedOnTime": 18,
+        "stepsIn10": 9.2,
+        "resultGoodIn10": 7.9,
+        "oldPer100": 1.6,
+        "renovatedPer100": 1.0
+      },
+      {
+        "week": -2,
+        "open": 17,
+        "overdue": 5,
+        "safetyOpen": 2,
+        "closed": 20,
+        "closedOnTime": 17,
+        "stepsIn10": 9.3,
+        "resultGoodIn10": 8.1,
+        "oldPer100": 1.6,
+        "renovatedPer100": 1.0
+      },
+      {
+        "week": -1,
+        "open": 16,
+        "overdue": 4,
+        "safetyOpen": 3,
+        "closed": 23,
+        "closedOnTime": 20,
+        "stepsIn10": 9.4,
+        "resultGoodIn10": 8.2,
+        "oldPer100": 1.5,
+        "renovatedPer100": 1.1
+      }
+    ]
+  }
 }

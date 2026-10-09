@@ -10,6 +10,7 @@ import { NoProblemSelected, ProblemsLayout } from './screens/Problems'
 import { ProblemDetail } from './screens/ProblemDetail'
 import { NewProblem } from './screens/NewProblem'
 import { Summary } from './screens/Summary'
+import { Leadership } from './screens/Leadership'
 import { QrSheet } from './screens/QrSheet'
 import { StartInspection } from './screens/StartInspection'
 import { InspectionRun } from './screens/InspectionRun'
@@ -63,6 +64,7 @@ function Frame() {
               <Route path="/checklist/:runId" element={<ChecklistRun />} />
               <Route path="/problems/new" element={<NewProblem />} />
               <Route path="/summary" element={<Summary />} />
+              <Route path="/leadership" element={<Leadership />} />
               <Route path="/qr-sheet" element={<QrSheet />} />
               <Route path="/inspections/start/:templateId" element={<StartInspection />} />
               <Route path="/inspection/:runId/summary" element={<InspectionSummary />} />

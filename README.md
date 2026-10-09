@@ -61,6 +61,13 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 2. Point out: old and renovated areas apart, condition and care apart, and the repeat at Room 5212.
 3. Tap the **Safety** tile. The list shows safety problems first. Open **Broken tiles inside the pool** (Zaitouna Pool): the interim note *Area roped off* sits at the top.
 
+**Leadership page (optional, 1 minute)** Pick **Samir** and tap **Leadership view**, or pick **CEO** or **Owner** from the name menu. Three tabs show what each person looks at, and how often:
+- **GM**, every morning: safety now, each department today, and overdue problems that need a push.
+- **CEO**, a daily glance plus the weekly trend: safety and overdue against last week, open and overdue over 9 weeks, the two inspection totals, care against condition.
+- **Owner**, weekly: safety in one line, the capex list by building, whether renovated areas hold up, and progress toward 2031.
+
+Weeks before the current one are made-up history (`leadershipHistory` in the seed file); the current week comes from the app.
+
 **6. Arabic (throughout)** Tap **العربية** at the top right. The same screen appears in Arabic, right to left.
 
 ## Where things are
@@ -74,6 +81,7 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 | Who may do what on a problem (rules 6–9) | `src/lib/problems.ts` |
 | The two inspection totals (rule 4) | `src/lib/inspections.ts` |
 | The one-page summary numbers | `src/lib/summary.ts` |
+| Leadership views (GM, CEO, Owner) | `src/lib/leadership.ts`, `src/screens/Leadership.tsx` |
 | Brand logo files | `assets/` (web copies made by `npm run icons`) |
 | Publishing workflow | `.github/workflows/pages.yml` |
 
@@ -87,6 +95,7 @@ Automated end-to-end checks run the real app in a browser at 360 px. Run them af
 | Problems: report, assign, fix, confirm (not your own), capex, safety, filters | `node scripts/e2e/problems.mjs scripts/e2e/sample-photo.jpg` |
 | Inspections: two marks, add as a problem, summary totals | `node scripts/e2e/inspections.mjs` |
 | Offline: service worker, offline tick, offline reload | `node scripts/e2e/offline.mjs` |
+| Leadership: three views in both languages, no overflow at 360 px | `node scripts/e2e/leadership.mjs` |
 | Screenshots in both languages at phone and tablet sizes | `node scripts/screenshots.mjs <folder>` |
 | UI showcase sheets | `node scripts/showcase.mjs docs/ui-showcase/raw && node scripts/build-showcase.mjs` |
 

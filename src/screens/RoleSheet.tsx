@@ -5,7 +5,7 @@ import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
 import type { Role } from '../types'
 
-const ORDER: Role[] = ['employee', 'supervisor', 'auditor', 'head', 'gm']
+const ORDER: Role[] = ['employee', 'supervisor', 'auditor', 'head', 'gm', 'ceo', 'owner']
 
 export function RoleSheet({ onClose }: { onClose: () => void }) {
   const { data } = useData()

@@ -9,6 +9,7 @@ import { useAppState } from '../state/AppState'
 import { RunStateChip, RUN_ICON, type RunState } from '../components/Chips'
 import { ProblemCard } from '../components/ProblemCard'
 import { Segments } from '../components/Progress'
+import { Leadership } from './Leadership'
 import { myChecklists, teamChecklists } from '../lib/checklists'
 import { isActive, shownStatus, sortProblems } from '../lib/problems'
 import { todayKey } from '../lib/dates'
@@ -35,6 +36,7 @@ export function Home() {
       {me.role === 'supervisor' && <SupervisorHome me={me} data={data} />}
       {me.role === 'auditor' && <AuditorHome me={me} data={data} />}
       {(me.role === 'head' || me.role === 'gm') && <SummaryHome me={me} data={data} />}
+      {(me.role === 'ceo' || me.role === 'owner') && <Leadership />}
     </>
   )
 }
@@ -52,6 +54,10 @@ function heroLine(me: User, data: AppData, t: (k: string, v?: Record<string, str
     return t('hero.supervisor', { n: waiting })
   }
   if (me.role === 'auditor') return t('hero.auditor', { n: data.inspectionTemplates.length })
+  if (me.role === 'ceo' || me.role === 'owner') {
+    const safety = data.problems.filter((p) => isActive(p) && p.safety).length
+    return safety ? t('hero.leadSafety', { n: safety }) : t('hero.leadCalm')
+  }
   const active = data.problems.filter((p) => isActive(p) && (me.department === 'all' || deptOf(p) === me.department))
   return t('hero.head', { n: active.length, o: active.filter((p) => shownStatus(p) === 'overdue').length })
 }
@@ -282,6 +288,9 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
           <span>{t('sum.capex')}: <strong>{inScope.filter((p) => p.status === 'capex').length}</strong></span>
         </div>
         <Link to="/summary" className="btn btn-secondary btn-block">{t('sum.full')}</Link>
+        {me.role === 'gm' && (
+          <Link to="/leadership" className="btn btn-primary btn-block">{t('lead.open')}</Link>
+        )}
       </section>
       <ProblemPreview title={t('problems.title')} problems={sortProblems(active)} />
     </>
