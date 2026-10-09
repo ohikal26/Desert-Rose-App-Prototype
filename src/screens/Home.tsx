@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  AlertTriangle, Archive, Camera, ChevronRight, ClipboardCheck, Clock, ListChecks, Play, Search, Users, Wrench,
+  AlertTriangle, Archive, Camera, ChevronRight, ClipboardCheck, Clock, ListChecks, Play, QrCode, Search, Undo2, Users,
+  Wrench,
 } from 'lucide-react'
 import { useData, type AppData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
@@ -59,7 +60,12 @@ function EmployeeHome({ me, data }: { me: User; data: AppData }) {
   return (
     <>
       <section className="stack" aria-labelledby="emp-title">
-        <h2 id="emp-title">{t('emp.title')}</h2>
+        <div className="section-head">
+          <h2 id="emp-title">{t('emp.title')}</h2>
+        </div>
+        <Link to="/checklists/start" className="btn btn-secondary btn-block">
+          <QrCode size={20} aria-hidden />{t('emp.scan')}
+        </Link>
         <div className="grid-2">
           {slots.map((s) => (
             <article key={`${s.location.id}-${s.template.id}`} className="card task-card">
@@ -73,16 +79,25 @@ function EmployeeHome({ me, data }: { me: User; data: AppData }) {
                 </div>
                 <RunStateChip state={s.state} />
               </div>
-              <Link to="/soon/2" className="btn btn-primary btn-block">
-                <Play size={20} aria-hidden />
-                {s.state === 'not-started' ? t('emp.start') : t('emp.continue')}
-              </Link>
+              {s.state === 'sent-back' && s.run?.check?.note && (
+                <p className="slot-note"><Undo2 size={18} aria-hidden />{t('check.sentBackTitle')} {s.run.check.note}</p>
+              )}
+              {s.state === 'done' ? (
+                <Link to={`/checklist/${s.run!.id}`} className="btn btn-secondary btn-block">
+                  <ChevronRight size={20} aria-hidden className="flip-rtl" />{t('emp.view')}
+                </Link>
+              ) : (
+                <Link to={`/checklist/open/${s.location.id}/${s.template.id}`} className="btn btn-primary btn-block">
+                  <Play size={20} aria-hidden />
+                  {s.state === 'not-started' ? t('emp.start') : t('emp.continue')}
+                </Link>
+              )}
             </article>
           ))}
         </div>
       </section>
 
-      <Link to="/soon/3" className="btn btn-secondary btn-block">
+      <Link to="/problems/new?source=reported" className="btn btn-secondary btn-block">
         <Camera size={20} aria-hidden />{t('emp.report')}
       </Link>
 
@@ -110,8 +125,10 @@ function SupervisorHome({ me, data }: { me: User; data: AppData }) {
       <section className="stack" aria-labelledby="sup-title">
         <div className="section-head">
           <h2 id="sup-title">{t('sup.title')}</h2>
-          {toCheck > 0 && <span className="chip chip-warning"><ClipboardCheck size={16} aria-hidden />{t('sup.toCheck', { n: toCheck })}</span>}
-        </div>
+          </div>
+        {toCheck > 0 && (
+          <p className="banner banner-warning"><ClipboardCheck size={20} aria-hidden /><span>{t('sup.toCheck', { n: toCheck })}</span></p>
+        )}
         <div className="tiles">
           {(['done', 'in-progress', 'not-started', 'sent-back'] as RunState[]).map((s) => {
             const Icon = RUN_ICON[s]
@@ -124,18 +141,32 @@ function SupervisorHome({ me, data }: { me: User; data: AppData }) {
           })}
         </div>
         <ul className="list">
-          {sorted.map((s) => (
-            <li key={`${s.location.id}-${s.template.id}`}>
-              <Link to="/soon/2" className="list-row" style={{ color: 'inherit', textDecoration: 'none' }}>
+          {sorted.map((s) => {
+            const body = (
+              <>
                 <div className="list-row-main">
                   <div className="list-row-title">{locName(s.location)}</div>
                   <div className="muted small">{c(`tpl.${s.template.id}`, s.template.name)}</div>
+                  {s.state === 'done' && !s.run?.check && (
+                    <div className="slot-note"><ClipboardCheck size={16} aria-hidden />{t('sup.waiting')}</div>
+                  )}
                 </div>
                 <RunStateChip state={s.state} />
-                <ChevronRight size={20} aria-hidden className="flip-rtl muted" />
-              </Link>
-            </li>
-          ))}
+              </>
+            )
+            return (
+              <li key={`${s.location.id}-${s.template.id}`}>
+                {s.run ? (
+                  <Link to={`/checklist/${s.run.id}`} className="list-row link-row">
+                    {body}
+                    <ChevronRight size={20} aria-hidden className="flip-rtl muted" />
+                  </Link>
+                ) : (
+                  <div className="list-row">{body}</div>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </section>
       <ProblemPreview title={t('problems.title')} problems={teamProblems} />

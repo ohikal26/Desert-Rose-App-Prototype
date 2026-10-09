@@ -52,6 +52,8 @@ export interface ItemEntry {
   done: boolean
   initials?: string
   at?: string // ISO time
+  /** The demo user who was signed in when the item was ticked. */
+  by?: string
   couldNotDo?: string
 }
 
@@ -70,8 +72,11 @@ export interface ChecklistRun {
   date: string // YYYY-MM-DD
   shift: Shift
   entries: ItemEntry[]
+  startedBy?: string
   submittedAt?: string
   check?: SupervisorCheck
+  /** Earlier "send back" checks, kept when the checklist is sent again. */
+  pastChecks?: SupervisorCheck[]
 }
 
 export type StepsMark = 'yes' | 'partly' | 'no'

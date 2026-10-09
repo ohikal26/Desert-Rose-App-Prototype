@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import type {
   ChecklistRun, ChecklistTemplate, InspectionRun, InspectionTemplate, Location, Problem, User,
 } from '../types'
-import { ensureSeeded, getAll, loadSeed } from './db'
+import { ensureSeeded, getAll, loadSeed, put, type StoreName } from './db'
 
 export interface AppData {
   users: User[]
@@ -19,6 +19,8 @@ interface DataCtx {
   error: boolean
   refresh: () => Promise<void>
   resetDemo: () => Promise<void>
+  /** Saves one record on the device and refreshes the screen. */
+  save: <T extends { id: string }>(store: StoreName, record: T) => Promise<void>
   user: (id: string) => User | undefined
   location: (id: string) => Location | undefined
 }
@@ -57,15 +59,20 @@ export function DataProvider({ children }: { children: ReactNode }) {
     await refresh()
   }, [refresh])
 
+  const save = useCallback(async <T extends { id: string }>(store: StoreName, record: T) => {
+    await put(store, record)
+    await refresh()
+  }, [refresh])
+
   const value = useMemo<DataCtx>(() => {
     const users = new Map(data?.users.map((u) => [u.id, u]))
     const locs = new Map(data?.locations.map((l) => [l.id, l]))
     return {
-      data, error, refresh, resetDemo,
+      data, error, refresh, resetDemo, save,
       user: (id) => users.get(id),
       location: (id) => locs.get(id),
     }
-  }, [data, error, refresh, resetDemo])
+  }, [data, error, refresh, resetDemo, save])
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }

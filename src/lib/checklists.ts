@@ -60,3 +60,24 @@ export function teamChecklists(department: 'recreation' | 'housekeeping', data: 
   }
   return out
 }
+
+export function newId(prefix: string): string {
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
+}
+
+/** A checklist can be sent when every task is done or has a "could not do" reason (brief 7.2). */
+export function readyToSubmit(run: ChecklistRun): boolean {
+  return run.entries.every((e) => e.done || !!e.couldNotDo?.trim())
+}
+
+export function emptyRun(loc: Location, tpl: ChecklistTemplate, userId: string): ChecklistRun {
+  return {
+    id: newId('run'), template: tpl.id, location: loc.id, date: todayKey(), shift: tpl.shift,
+    startedBy: userId, entries: tpl.items.map((i) => ({ itemId: i.id, done: false })),
+  }
+}
+
+/** Valid initials: two or three letters, Latin or Arabic (rule 2). */
+export function validInitials(s: string): boolean {
+  return /^\p{L}{2,3}$/u.test(s.trim())
+}

@@ -1,6 +1,5 @@
 {
   "_review": "Every Arabic string in the app is in this file. Draft only: needs review by a native speaker before the demo. 'ui' = screen text (same keys as en.json). 'content' = demo data, keyed by the ids in src/data/seed.json. {name} and {n} are placeholders: keep them as they are.",
-
   "ui": {
     "app.name": "Desert Rose OE",
     "app.prototype": "نموذج تجريبي · بيانات تجريبية",
@@ -8,13 +7,11 @@
     "conn.offline": "غير متصل · ستتم المزامنة",
     "lang.switchTo": "English",
     "lang.switchLabel": "تغيير اللغة إلى الإنجليزية",
-
     "nav.home": "الرئيسية",
     "nav.problems": "المشكلات",
     "nav.settings": "الإعدادات",
     "nav.main": "القائمة الرئيسية",
     "nav.back": "رجوع",
-
     "role.employee": "موظف",
     "role.supervisor": "مشرف",
     "role.auditor": "مدقق الجودة",
@@ -24,24 +21,20 @@
     "dept.housekeeping": "التدبير الفندقي",
     "dept.oe": "الجودة",
     "dept.all": "المنتجع كله",
-
     "home.hello": "أهلاً، {name}",
     "home.switchRole": "من يستخدم التطبيق؟",
     "home.switchRoleHint": "اختر شخصاً لترى التطبيق كما يراه.",
     "home.youAre": "أنت",
     "home.change": "تغيير",
-
     "shift.morning": "الوردية الصباحية",
     "shift.evening": "الوردية المسائية",
     "shift.night": "الوردية الليلية",
-
     "emp.title": "قوائم مهامي اليوم",
     "emp.items": "{n} مهام",
     "emp.start": "ابدأ قائمة المهام",
     "emp.continue": "أكمل قائمة المهام",
     "emp.report": "الإبلاغ عن مشكلة",
     "emp.myProblems": "مشكلاتي",
-
     "sup.title": "فريقي اليوم",
     "sup.done": "تم",
     "sup.inProgress": "قيد التنفيذ",
@@ -49,12 +42,10 @@
     "sup.sentBack": "أُعيدت",
     "sup.toCheck": "{n} بانتظار مراجعتك",
     "sup.openChecklists": "عرض قوائم المهام",
-
     "aud.title": "ابدأ جولة تفتيش",
     "aud.items": "{n} بنود",
     "aud.start": "ابدأ جولة التفتيش",
     "aud.recent": "المشكلات التي وجدتها",
-
     "sum.title": "الملخص",
     "sum.open": "مشكلات مفتوحة",
     "sum.overdue": "متأخرة",
@@ -62,7 +53,6 @@
     "sum.fixedWaiting": "تم الإصلاح، بانتظار التأكيد",
     "sum.capex": "في قائمة الاستثمار",
     "sum.full": "عرض الملخص الكامل",
-
     "status.open": "مفتوحة",
     "status.fixed": "تم الإصلاح، بانتظار التأكيد",
     "status.closed": "مغلقة ومؤكدة",
@@ -70,15 +60,12 @@
     "status.capex": "أُحيلت لقائمة الاستثمار",
     "status.dueTomorrow": "موعدها غداً",
     "status.dueToday": "موعدها اليوم",
-
     "tag.condition": "حالة المبنى والمعدات",
     "tag.care": "العناية والخدمة",
     "tag.old": "منطقة قديمة",
     "tag.renovated": "منطقة مجدَّدة",
-
     "problems.title": "قائمة المشكلات",
     "problems.count": "المشكلات: {n}",
-
     "settings.title": "الإعدادات",
     "settings.language": "اللغة",
     "settings.textSize": "حجم الخط",
@@ -95,15 +82,66 @@
     "settings.exportNote": "متاح في الأداة الفعلية",
     "settings.about": "عن هذا النموذج",
     "settings.aboutText": "هذا نموذج تجريبي لعرض الفكرة واختبارها مع الموظفين. يستخدم بيانات تجريبية غير حقيقية، ويحفظ كل شيء على هذا الجهاز فقط. لا يوجد تسجيل دخول حقيقي ولا ربط بأنظمة أخرى.",
-
     "soon.title": "يأتي في المرحلة التالية",
     "soon.text": "هذا الجزء من النموذج يُبنى في المرحلة {n}.",
-
     "state.loading": "جارٍ التحميل…",
     "state.empty": "لا توجد مشكلات هنا. عمل رائع.",
-    "state.error": "لم يتم الحفظ. سنحاول مرة أخرى عند الاتصال."
+    "state.error": "لم يتم الحفظ. سنحاول مرة أخرى عند الاتصال.",
+    "emp.scan": "امسح الرمز للبدء",
+    "emp.view": "عرض قائمة المهام",
+    "sup.waiting": "بانتظار مراجعتك",
+    "start.title": "ابدأ قائمة مهام",
+    "start.how": "طريقة تحديد المكان",
+    "start.scan": "امسح الرمز",
+    "start.pick": "اختر من القائمة",
+    "start.scanHint": "وجّه الكاميرا نحو الرمز المثبت على الحائط.",
+    "start.cantScan": "الكاميرا لا تعمل؟ اختر المكان من القائمة",
+    "start.unknownCode": "هذا الرمز ليس من رموزنا. اختر المكان من القائمة.",
+    "start.noChecklist": "لا توجد قائمة مهام لـ {place} حتى الآن.",
+    "scan.noCamera": "لم تفتح الكاميرا. اختر المكان من القائمة.",
+    "scan.videoLabel": "صورة الكاميرا لمسح الرمز",
+    "pick.search": "ابحث عن مكان",
+    "pick.placeholder": "الاسم أو رقم الغرفة",
+    "pick.mine": "أماكني",
+    "pick.all": "كل الأماكن",
+    "pick.more": "يوجد {n} غيرها. اكتب لتضييق القائمة.",
+    "pick.none": "لا يوجد مكان مطابق. تأكد من الاسم أو رقم الغرفة.",
+    "run.notFound": "لم نجد قائمة المهام هذه.",
+    "run.tickingAs": "تُسجَّل المهام باسم",
+    "run.tapToTick": "اضغط على المهمة عند إنجازها. سنطلب الأحرف الأولى من اسمك مرة واحدة.",
+    "run.progress": "تم {done} من {total}",
+    "run.notReady": "أنجز كل المهام، أو اذكر سبب تعذّر التنفيذ",
+    "run.submit": "إرسال قائمة المهام",
+    "run.sent": "تم إرسال قائمة المهام. شكراً لك.",
+    "run.sentAt": "أُرسلت الساعة {time}. بانتظار مراجعة المشرف.",
+    "ini.title": "الأحرف الأولى من اسمك",
+    "ini.label": "الأحرف الأولى (حرفان أو ثلاثة)",
+    "ini.hint": "تظهر بجانب كل مهمة تنجزها، مع الوقت.",
+    "ini.save": "حفظ الأحرف",
+    "cnd.label": "تعذّر التنفيذ",
+    "cnd.why": "ما السبب؟",
+    "cnd.reason1": "غير متوفر أو نفد من المخزن",
+    "cnd.reason2": "معطّل، وتم الإبلاغ عن المشكلة",
+    "cnd.reason3": "المنطقة مغلقة",
+    "cnd.save": "حفظ السبب",
+    "cnd.clear": "حذف السبب",
+    "check.hint": "اذهب وانظر إلى المكان. راجع النتيجة، لا علامات الإنجاز.",
+    "check.ok": "النتيجة سليمة",
+    "check.okDone": "تم التسجيل: النتيجة سليمة.",
+    "check.sendBack": "إعادة",
+    "check.sentBackTitle": "أُعيدت:",
+    "check.sentBackDone": "أُعيدت إلى الفريق.",
+    "check.noteLabel": "ما الذي يجب أن ينظروا إليه مرة أخرى؟",
+    "check.notePlaceholder": "مثلاً: يرجى فحص المصرف مرة أخرى",
+    "check.photoLabel": "صورة (اختياري)",
+    "check.photoAlt": "صورة من المشرف",
+    "photo.take": "التقط صورة",
+    "photo.retake": "التقط صورة أخرى",
+    "photo.remove": "حذف الصورة",
+    "photo.open": "اضغط لعرضها بملء الشاشة",
+    "photo.close": "إغلاق",
+    "photo.alt": "صورة"
   },
-
   "content": {
     "user.karim": "كريم",
     "user.mona": "منى",
@@ -121,7 +159,6 @@
     "job.tarek": "مدير الترفيه",
     "job.laila": "مديرة التدبير الفندقي",
     "job.samir": "المدير العام",
-
     "loc.quiet-pool": "المسبح الهادئ",
     "loc.activities-pool": "مسبح الأنشطة",
     "loc.aqua-park": "الأكوا بارك",
@@ -135,7 +172,6 @@
     "loc.room": "غرفة {n}",
     "loc.building": "المبنى {n}",
     "loc.corridor": "ممر المبنى {n}",
-
     "tpl.pool-opening": "افتتاح المسبح",
     "tpl.towel-opening": "مركز المناشف",
     "tpl.aquapark-opening": "افتتاح الأكوا بارك",
@@ -145,7 +181,6 @@
     "tpl.hk-stores-opening": "مخازن التدبير الفندقي والتسليم",
     "tpl.pool-inspection": "تفتيش المسبح",
     "tpl.room-inspection": "تفتيش غرفة شاغرة",
-
     "item.pool-opening-1": "المنقذ في كرسيه قبل وصول أول نزيل",
     "item.pool-opening-2": "طوق النجاة وأنبوب الإنقاذ وحقيبة الإسعافات الأولية في مكانها وكاملة",
     "item.pool-opening-3": "الماء صافٍ؛ نظّف سطح الماء وأفرغ سلال الكاشطات",
@@ -153,31 +188,26 @@
     "item.pool-opening-5": "حوض القدمين والدش يعملان ونظيفان",
     "item.pool-opening-6": "المصارف والشبكات خالية من الطحالب",
     "item.pool-opening-7": "لوحات قواعد المسبح والأعماق في مكانها وواضحة",
-
     "item.towel-opening-1": "تم عدّ المناشف وتسجيلها في دفتر السجل",
     "item.towel-opening-2": "منشفة واحدة لكل بطاقة مناشف",
     "item.towel-opening-3": "المناشف النظيفة والمستعملة على عربات منفصلة",
     "item.towel-opening-4": "الكاونتر مرتب وفيه موظف من وقت الافتتاح",
-
     "item.aquapark-opening-1": "المنقذ ومساعدو الشاطئ في أماكنهم؛ لا أحد يغادر دون بديل",
     "item.aquapark-opening-2": "تم فحص الزحاليق والأبراج والسلالم: نظيفة وآمنة ولا شيء مرتخٍ",
     "item.aquapark-opening-3": "الحصائر المانعة للانزلاق في مكانها",
     "item.aquapark-opening-4": "لوحة الطول المسموح في مكانها (120 سم على الأقل)",
     "item.aquapark-opening-5": "الموسيقى ولوحات التعليمات والعوامات جاهزة",
-
     "item.beach-opening-1": "المنقذ في البرج قبل وصول أول نزيل",
     "item.beach-opening-2": "لوح الإنقاذ وطوق النجاة وحقيبة الإسعافات الأولية في مكانها وكاملة",
     "item.beach-opening-3": "عوامات وأعلام منطقة السباحة في مكانها؛ تم رفع علم اليوم",
     "item.beach-opening-4": "الرمل مسوّى وخالٍ من الزجاج والعلب والأشياء الحادة",
     "item.beach-opening-5": "الأسرّة الشمسية والمظلات والطاولات مصفوفة ونظيفة",
     "item.beach-opening-6": "لوحات قواعد الشاطئ وتحذيرات البحر في مكانها وواضحة",
-
     "item.room-attendant-start-1": "العربة مجهزة ومرتبة؛ البياضات النظيفة على الرفوف العليا فقط",
     "item.room-attendant-start-2": "الفوط الملونة جاهزة (لون للحمام ولون للغرفة)",
     "item.room-attendant-start-3": "المنظفات عليها ملصقات ومخففة بشكل صحيح",
     "item.room-attendant-start-4": "تمت مراجعة ترتيب غرف اليوم مع المشرف",
     "item.room-attendant-start-5": "كيس المفقودات على العربة",
-
     "item.vacant-room-ready-1": "الحمام نظيف ومعقّم وفيه كل المستلزمات",
     "item.vacant-room-ready-2": "المصارف مفتوحة ونظيفة",
     "item.vacant-room-ready-3": "الغلاية والأكواب وصينية الشاي والقهوة نظيفة وكاملة",
@@ -186,13 +216,11 @@
     "item.vacant-room-ready-6": "الخزنة تم فحصها وتنظيفها وتُركت مفتوحة",
     "item.vacant-room-ready-7": "الستائر نظيفة وبلا بقع",
     "item.vacant-room-ready-8": "تم إزالة الغبار، خلف السرير وتحته أيضاً",
-
     "item.hk-stores-opening-1": "تم عدّ البياضات الداخلة والخارجة وتسجيلها في دفتر السجل",
     "item.hk-stores-opening-2": "البياضات النظيفة والمستعملة منفصلة",
     "item.hk-stores-opening-3": "المنظفات على رف خاص بها، عليها ملصقات ومغلقة",
     "item.hk-stores-opening-4": "الأرضية نظيفة وجافة؛ لا شيء مخزّن على الأرض",
     "item.hk-stores-opening-5": "تم فحص مخزون مستلزمات النزلاء والإبلاغ عن النواقص",
-
     "item.pool-insp-1": "المنقذ في مكانه ومنتبه",
     "item.pool-insp-2": "معدات الإنقاذ كاملة",
     "item.pool-insp-3": "صفاء الماء",
@@ -201,7 +229,6 @@
     "item.pool-insp-6": "حوض القدمين والدش",
     "item.pool-insp-7": "الأسرّة الشمسية والطاولات والمظلات",
     "item.pool-insp-8": "الأرضية خالية من المخاطر",
-
     "item.room-insp-1": "المدخل والباب",
     "item.room-insp-2": "الحمام",
     "item.room-insp-3": "المصارف",
@@ -212,9 +239,7 @@
     "item.room-insp-8": "الستائر",
     "item.room-insp-9": "إزالة الغبار",
     "item.room-insp-10": "السرير والبياضات",
-
     "sendback.run-seed-3": "يرجى فحص لوح الإنقاذ مرة أخرى",
-
     "prob.p-01": "غبار على شبكة التكييف",
     "prob.p-02": "بقعة على الستارة",
     "prob.p-03": "صدأ على مسمار الغلاية",
@@ -232,7 +257,6 @@
     "prob.p-15": "شعر في مصرف الدش",
     "prob.p-16": "غبار على شبكة التكييف",
     "prob.p-17": "قراءة الكلور غير مسجلة",
-
     "interim.p-06": "تم تطويق المنطقة بحبل",
     "interim.p-08": "تم وضع لافتة تحذير وإغلاق جهة السلم",
     "interim.p-12": "تم تمشيط المنطقة وفحصها يدوياً"
