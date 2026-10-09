@@ -603,3 +603,48 @@ textarea.input { min-height: 96px; resize: vertical; }
 .dot.mark-warning { background: var(--warning); }
 .dot.mark-critical { background: var(--critical); }
 @media (min-width: 768px) { .totals { gap: var(--s2); } }
+
+/* ---------- Summary ---------- */
+.tiles-3 { grid-template-columns: 1fr 1fr; }
+@media (min-width: 600px) { .tiles-3 { grid-template-columns: repeat(3, 1fr); } }
+.tile-number.is-good { color: var(--good); }
+.tile-number.is-warning { color: var(--warning); }
+.tile.is-good .tile-icon { background: var(--good-bg); color: var(--good); }
+.tile.is-warning .tile-icon { background: var(--warning-bg); color: var(--warning); }
+.tile.is-critical .tile-icon { background: var(--critical-bg); color: var(--critical); }
+.bars { display: flex; flex-direction: column; gap: var(--s2); }
+.bar-group { display: flex; flex-direction: column; gap: 4px; }
+.bar-title { font-weight: 700; font-size: var(--fs-label); }
+.bar-row { display: grid; grid-template-columns: 110px 1fr 32px; align-items: center; gap: var(--s1); min-height: 32px; color: inherit; text-decoration: none; }
+.bar-label { font-size: var(--fs-label); color: var(--grey); }
+.bar-track { height: 16px; background: var(--pearl); border-radius: 999px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; border-radius: 999px; min-width: 2px; }
+.bar-condition { background: var(--teal); }
+.bar-care { background: var(--sage); }
+.bar-n { font-weight: 700; text-align: end; font-variant-numeric: tabular-nums; }
+
+/* ---------- QR sheet ---------- */
+.qr-page { display: flex; flex-direction: column; gap: var(--s3); }
+.qr-toolbar { display: flex; justify-content: space-between; align-items: center; }
+.qr-head { display: flex; align-items: center; gap: var(--s2); }
+.qr-logo { height: 56px; }
+.qr-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--s2); }
+.qr-card {
+  background: var(--card); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+  break-inside: avoid;
+}
+.qr-card img { width: 100%; max-width: 160px; aspect-ratio: 1; }
+.qr-placeholder { width: 100%; max-width: 160px; aspect-ratio: 1; background: var(--pearl); border-radius: 8px; }
+.qr-name { font-weight: 700; font-size: 15px; line-height: 1.3; }
+.qr-name:lang(ar) { font-family: "IBM Plex Sans Arabic", sans-serif; }
+.qr-name:lang(en) { font-family: "Nunito Sans", sans-serif; }
+.qr-id { font-size: 11px; color: var(--grey); font-family: monospace; }
+@media print {
+  @page { size: A4; margin: 12mm; }
+  .no-print, .header, .bottom-nav { display: none !important; }
+  .main { padding: 0; max-width: none; }
+  body { background: #fff; }
+  .qr-grid { grid-template-columns: repeat(4, 1fr); gap: 8mm; }
+  .qr-card { border-color: #999; }
+}

@@ -10,6 +10,8 @@ import { ChecklistRun } from './screens/ChecklistRun'
 import { NoProblemSelected, ProblemsLayout } from './screens/Problems'
 import { ProblemDetail } from './screens/ProblemDetail'
 import { NewProblem } from './screens/NewProblem'
+import { Summary } from './screens/Summary'
+import { QrSheet } from './screens/QrSheet'
 import { StartInspection } from './screens/StartInspection'
 import { InspectionRun } from './screens/InspectionRun'
 import { InspectionSummary } from './screens/InspectionSummary'
@@ -27,7 +29,7 @@ export function App() {
 }
 
 // Task screens hide the menu so the main action sits at the bottom, within thumb reach.
-const TASK_SCREENS = /^\/(checklist|checklists|inspection|inspections)\/|^\/problems\/new/
+const TASK_SCREENS = /^\/(checklist|checklists|inspection|inspections)\/|^\/problems\/new|^\/qr-sheet/
 // A single problem hides the menu on phones only; tablets show it beside the list.
 const DETAIL_SCREENS = /^\/problems\/[^/]+$/
 
@@ -62,6 +64,8 @@ function Frame() {
               <Route path="/checklist/open/:locationId/:templateId" element={<OpenChecklist />} />
               <Route path="/checklist/:runId" element={<ChecklistRun />} />
               <Route path="/problems/new" element={<NewProblem />} />
+              <Route path="/summary" element={<Summary />} />
+              <Route path="/qr-sheet" element={<QrSheet />} />
               <Route path="/inspections/start/:templateId" element={<StartInspection />} />
               <Route path="/inspection/:runId/summary" element={<InspectionSummary />} />
               <Route path="/inspection/:runId/:index?" element={<InspectionRun />} />

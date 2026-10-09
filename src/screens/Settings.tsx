@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { BarChart3, Info, RotateCcw } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { BarChart3, Info, QrCode, RotateCcw } from 'lucide-react'
 import { useData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
@@ -65,6 +66,11 @@ export function Settings() {
           </button>
           <span id="export-note" className="muted small">{t('settings.exportNote')}</span>
         </div>
+      </section>
+
+      <section className="card stack" aria-labelledby="set-qr">
+        <h2 id="set-qr">{t('qr.title')}</h2>
+        <Link to="/qr-sheet" className="btn btn-secondary btn-block"><QrCode size={20} aria-hidden />{t('qr.open')}</Link>
       </section>
 
       <section className="card stack" aria-labelledby="set-about">

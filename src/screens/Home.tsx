@@ -281,7 +281,7 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
           <Archive size={20} aria-hidden />
           <span>{t('sum.capex')}: <strong>{inScope.filter((p) => p.status === 'capex').length}</strong></span>
         </div>
-        <Link to="/soon/5" className="btn btn-secondary btn-block">{t('sum.full')}</Link>
+        <Link to="/summary" className="btn btn-secondary btn-block">{t('sum.full')}</Link>
       </section>
       <ProblemPreview title={t('problems.title')} problems={sortProblems(active)} />
     </>
