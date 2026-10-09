@@ -61,9 +61,12 @@ export function NewProblem() {
 
   const itemId = params.get('item') ?? undefined
   const source = (params.get('source') as Problem['source']) ?? 'reported'
-  const [title, setTitle] = useState('')
+  const inspectionId = params.get('inspection') ?? undefined
+  const inspection = inspectionId ? data?.inspectionRuns.find((r) => r.id === inspectionId) : undefined
+  const inspEntry = inspection?.entries.find((e) => e.itemId === itemId)
+  const [title, setTitle] = useState(inspEntry?.note ?? '')
   const [locId, setLocId] = useState<string | undefined>(params.get('location') ?? undefined)
-  const [photo, setPhoto] = useState<string>()
+  const [photo, setPhoto] = useState<string | undefined>(inspEntry?.photo)
   const [kind, setKind] = useState<ProblemKind>()
   const [safety, setSafety] = useState(false)
   const [interim, setInterim] = useState('')
@@ -74,7 +77,7 @@ export function NewProblem() {
   const [tried, setTried] = useState(false)
 
   const item = useMemo(() => itemId
-    ? data?.checklistTemplates.flatMap((x) => x.items).find((i) => i.id === itemId)
+    ? [...(data?.checklistTemplates ?? []), ...(data?.inspectionTemplates ?? [])].flatMap((x) => x.items).find((i) => i.id === itemId)
     : undefined, [data, itemId])
 
   if (!data || !me) return null
@@ -99,9 +102,15 @@ export function NewProblem() {
     }
     try {
       await save('problems', p)
+      if (inspection && inspEntry) {
+        // Remember which problem this inspection item created.
+        await save('inspectionRuns', {
+          ...inspection, entries: inspection.entries.map((e) => (e.itemId === itemId ? { ...e, problemId: p.id } : e)),
+        })
+      }
       toast(t('new.saved'))
-      // Back to the checklist the person came from, otherwise to the new problem.
-      if (source === 'checklist') nav(-1)
+      // Back to the checklist or inspection the person came from, otherwise to the new problem.
+      if (source === 'checklist' || inspection) nav(-1)
       else nav(`/problems/${p.id}`, { replace: true })
     } catch {
       toast(t('state.error'))

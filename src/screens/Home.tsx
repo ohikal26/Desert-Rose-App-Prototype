@@ -200,7 +200,7 @@ function SupervisorHome({ me, data }: { me: User; data: AppData }) {
 }
 
 function AuditorHome({ me, data }: { me: User; data: AppData }) {
-  const { t, c } = useI18n()
+  const { t, c, locName } = useI18n()
   const found = sortProblems(data.problems.filter((p) => p.history[0]?.by === me.id && isActive(p)))
   return (
     <>
@@ -213,13 +213,36 @@ function AuditorHome({ me, data }: { me: User; data: AppData }) {
                 <h3>{c(`tpl.${tpl.id}`, tpl.name)}</h3>
                 <p className="muted small">{t(`dept.${tpl.department}`)} · {t('aud.items', { n: tpl.items.length })}</p>
               </div>
-              <Link to="/soon/4" className="btn btn-primary btn-block">
+              <Link to={`/inspections/start/${tpl.id}`} className="btn btn-primary btn-block">
                 <Search size={20} aria-hidden />{t('aud.start')}
               </Link>
             </article>
           ))}
         </div>
       </section>
+      {data.inspectionRuns.length > 0 && (
+        <section className="stack-sm" aria-labelledby="aud-runs">
+          <h2 id="aud-runs" className="section-title">{t('aud.myInspections')}</h2>
+          <ul className="list">
+            {[...data.inspectionRuns].sort((a, b) => b.startedAt.localeCompare(a.startedAt)).slice(0, 5).map((r) => {
+              const tpl = data.inspectionTemplates.find((x) => x.id === r.template)!
+              const marked = r.entries.filter((e) => e.steps && e.result).length
+              return (
+                <li key={r.id}>
+                  <Link to={r.finishedAt ? `/inspection/${r.id}/summary` : `/inspection/${r.id}/0`} className="list-row link-row">
+                    <div className="list-row-main">
+                      <div className="list-row-title">{locName(data.locations.find((l) => l.id === r.location))}</div>
+                      <div className="muted small">{c(`tpl.${tpl.id}`, tpl.name)} · {t('insp.marked', { n: marked, total: r.entries.length })}</div>
+                    </div>
+                    <RunStateChip state={r.finishedAt ? 'done' : 'in-progress'} />
+                    <ChevronRight size={20} aria-hidden className="flip-rtl muted" />
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      )}
       <ProblemPreview title={t('aud.recent')} problems={found} listLink="/problems?scope=all" />
     </>
   )
