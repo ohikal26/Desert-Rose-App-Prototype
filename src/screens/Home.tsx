@@ -1,15 +1,14 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  AlertTriangle, Archive, Camera, ChevronRight, ClipboardCheck, Clock, ListChecks, Play, QrCode, Search, Undo2, Users,
+  AlertTriangle, Archive, Camera, ChevronRight, ClipboardCheck, Clock, ListChecks, Play, QrCode, Search, Undo2,
   Wrench,
 } from 'lucide-react'
 import { useData, type AppData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
-import { RoleSheet } from './RoleSheet'
 import { RunStateChip, RUN_ICON, type RunState } from '../components/Chips'
 import { ProblemCard } from '../components/ProblemCard'
+import { Segments } from '../components/Progress'
 import { myChecklists, teamChecklists } from '../lib/checklists'
 import { isActive, shownStatus, sortProblems } from '../lib/problems'
 import { todayKey } from '../lib/dates'
@@ -17,90 +16,114 @@ import type { Problem, User } from '../types'
 
 export function Home() {
   const { data, user } = useData()
-  const { t, userName, jobName, formatDate } = useI18n()
+  const { t, userName, formatDate } = useI18n()
   const { userId } = useAppState()
-  const [sheet, setSheet] = useState(false)
   const me = user(userId)
   if (!data || !me) return <p className="state-box muted">{t('state.loading')}</p>
 
   return (
     <>
-      <div className="hello">
-        <span className="muted small">{formatDate(todayKey())} · {t('shift.morning')}</span>
-        <h1>{t('home.hello', { name: userName(me) })}</h1>
-      </div>
-
-      <section className="card who" aria-label={t('home.youAre')}>
-        <span className="avatar" aria-hidden>{me.initials}</span>
-        <div className="who-text">
-          <span className="muted small">{t('home.youAre')}</span>
-          <div className="who-name">{t(`role.${me.role}`)}</div>
-          <div className="muted small">
-            {me.role === 'gm' ? t('dept.all') : `${jobName(me)} · ${t(`dept.${me.department}`)}`}
-          </div>
+      <section className="hero">
+        <div className="hero-inner">
+          <span className="hero-date">{formatDate(todayKey())} · {t('shift.morning')}</span>
+          <h1>{t('home.hello', { name: userName(me) })}</h1>
+          <p className="hero-sub">{heroLine(me, data, t)}</p>
         </div>
-        <button type="button" className="btn btn-secondary" onClick={() => setSheet(true)}>
-          <Users size={20} aria-hidden />{t('home.change')}
-        </button>
       </section>
 
       {me.role === 'employee' && <EmployeeHome me={me} data={data} />}
       {me.role === 'supervisor' && <SupervisorHome me={me} data={data} />}
       {me.role === 'auditor' && <AuditorHome me={me} data={data} />}
       {(me.role === 'head' || me.role === 'gm') && <SummaryHome me={me} data={data} />}
-
-      {sheet && <RoleSheet onClose={() => setSheet(false)} />}
     </>
   )
+}
+
+/** One plain sentence under the greeting: what today looks like for this person. */
+function heroLine(me: User, data: AppData, t: (k: string, v?: Record<string, string | number>) => string): string {
+  const deptOf = (p: Problem) => data.locations.find((l) => l.id === p.location)?.department
+  if (me.role === 'employee') {
+    const left = myChecklists(me, data).filter((s) => s.state !== 'done').length
+    const probs = data.problems.filter((p) => p.owner === me.id && p.status === 'open').length
+    return t('hero.employee', { n: left, p: probs })
+  }
+  if (me.role === 'supervisor') {
+    const waiting = teamChecklists(me.department as 'recreation', data).filter((s) => s.state === 'done' && !s.run?.check).length
+    return t('hero.supervisor', { n: waiting })
+  }
+  if (me.role === 'auditor') return t('hero.auditor', { n: data.inspectionTemplates.length })
+  const active = data.problems.filter((p) => isActive(p) && (me.department === 'all' || deptOf(p) === me.department))
+  return t('hero.head', { n: active.length, o: active.filter((p) => shownStatus(p) === 'overdue').length })
 }
 
 function EmployeeHome({ me, data }: { me: User; data: AppData }) {
   const { t, c, locName } = useI18n()
   const slots = myChecklists(me, data)
+  const order: RunState[] = ['sent-back', 'in-progress', 'not-started', 'done']
+  const sorted = [...slots].sort((a, b) => order.indexOf(a.state) - order.indexOf(b.state))
+  const next = sorted.find((s) => s.state !== 'done')
+  const rest = sorted.filter((s) => s !== next)
   const mine = sortProblems(data.problems.filter((p) => p.owner === me.id && isActive(p)))
+  const count = (s: (typeof slots)[number]) => s.run?.entries.filter((e) => e.done).length ?? 0
+  const skipped = (s: (typeof slots)[number]) => s.run?.entries.filter((e) => !e.done && e.couldNotDo).length ?? 0
+
   return (
     <>
-      <section className="stack" aria-labelledby="emp-title">
-        <div className="section-head">
-          <h2 id="emp-title">{t('emp.title')}</h2>
-        </div>
-        <Link to="/checklists/start" className="btn btn-secondary btn-block">
-          <QrCode size={20} aria-hidden />{t('emp.scan')}
-        </Link>
-        <div className="grid-2">
-          {slots.map((s) => (
-            <article key={`${s.location.id}-${s.template.id}`} className="card task-card">
-              <div className="task-card-head">
-                <div>
-                  <h3>{locName(s.location)}</h3>
-                  <p className="muted small">
-                    {c(`tpl.${s.template.id}`, s.template.name)} · {t(`shift.${s.template.shift}`)} ·{' '}
-                    {t('emp.items', { n: s.template.items.length })}
-                  </p>
-                </div>
-                <RunStateChip state={s.state} />
-              </div>
-              {s.state === 'sent-back' && s.run?.check?.note && (
-                <p className="slot-note"><Undo2 size={18} aria-hidden />{t('check.sentBackTitle')} {s.run.check.note}</p>
-              )}
-              {s.state === 'done' ? (
-                <Link to={`/checklist/${s.run!.id}`} className="btn btn-secondary btn-block">
-                  <ChevronRight size={20} aria-hidden className="flip-rtl" />{t('emp.view')}
-                </Link>
-              ) : (
-                <Link to={`/checklist/open/${s.location.id}/${s.template.id}`} className="btn btn-primary btn-block">
-                  <Play size={20} aria-hidden />
-                  {s.state === 'not-started' ? t('emp.start') : t('emp.continue')}
-                </Link>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
+      {next ? (
+        <article className="card next-card" aria-labelledby="next-title">
+          <div className="task-card-head">
+            <span className="eyebrow">{t('home.nextUp')}</span>
+            <RunStateChip state={next.state} />
+          </div>
+          <div>
+            <h2 id="next-title" className="next-title">{locName(next.location)}</h2>
+            <p className="muted small">{c(`tpl.${next.template.id}`, next.template.name)} · {t(`shift.${next.template.shift}`)}</p>
+          </div>
+          {next.state === 'sent-back' && next.run?.check?.note && (
+            <p className="slot-note"><Undo2 size={18} aria-hidden />{t('check.sentBackTitle')} {next.run.check.note}</p>
+          )}
+          <div className="stack-sm">
+            <Segments done={count(next)} skipped={skipped(next)} total={next.template.items.length} />
+            <span className="small muted">{t('run.progress', { done: count(next), total: next.template.items.length })}</span>
+          </div>
+          <Link to={`/checklist/open/${next.location.id}/${next.template.id}`} className="btn btn-primary btn-block btn-lg">
+            <Play size={20} aria-hidden />
+            {next.state === 'not-started' ? t('emp.start') : t('emp.continue')}
+          </Link>
+        </article>
+      ) : (
+        <p className="card state-box"><ClipboardCheck size={28} aria-hidden className="text-good" />{t('home.allDone')}</p>
+      )}
 
-      <Link to="/problems/new" className="btn btn-secondary btn-block">
-        <Camera size={20} aria-hidden />{t('emp.report')}
-      </Link>
+      <div className="quick-actions">
+        <Link to="/checklists/start" className="quick-action">
+          <span className="quick-icon"><QrCode size={22} aria-hidden /></span>{t('emp.scan')}
+        </Link>
+        <Link to="/problems/new" className="quick-action">
+          <span className="quick-icon"><Camera size={22} aria-hidden /></span>{t('emp.report')}
+        </Link>
+      </div>
+
+      {rest.length > 0 && (
+        <section className="stack-sm" aria-labelledby="emp-title">
+          <h2 id="emp-title" className="section-title">{t('emp.title')}</h2>
+          <ul className="list">
+            {rest.map((s) => (
+              <li key={`${s.location.id}-${s.template.id}`}>
+                <Link to={s.state === 'done' ? `/checklist/${s.run!.id}` : `/checklist/open/${s.location.id}/${s.template.id}`}
+                  className="list-row link-row">
+                  <div className="list-row-main">
+                    <div className="list-row-title">{locName(s.location)}</div>
+                    <div className="muted small">{c(`tpl.${s.template.id}`, s.template.name)} · {t('emp.items', { n: s.template.items.length })}</div>
+                  </div>
+                  <RunStateChip state={s.state} />
+                  <ChevronRight size={20} aria-hidden className="flip-rtl muted" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <ProblemPreview title={t('emp.myProblems')} problems={mine} listLink="/problems?scope=mine" />
     </>
@@ -125,7 +148,7 @@ function SupervisorHome({ me, data }: { me: User; data: AppData }) {
     <>
       <section className="stack" aria-labelledby="sup-title">
         <div className="section-head">
-          <h2 id="sup-title">{t('sup.title')}</h2>
+          <h2 id="sup-title" className="section-title">{t('sup.title')}</h2>
           </div>
         {toCheck > 0 && (
           <p className="banner banner-warning"><ClipboardCheck size={20} aria-hidden /><span>{t('sup.toCheck', { n: toCheck })}</span></p>
@@ -134,9 +157,10 @@ function SupervisorHome({ me, data }: { me: User; data: AppData }) {
           {(['done', 'in-progress', 'not-started', 'sent-back'] as RunState[]).map((s) => {
             const Icon = RUN_ICON[s]
             return (
-              <div key={s} className="tile">
+              <div key={s} className={`tile tile-${s}`}>
+                <span className="tile-icon"><Icon size={18} aria-hidden /></span>
                 <span className="tile-number">{count(s)}</span>
-                <span className="tile-label"><Icon size={18} aria-hidden />{labels[s]}</span>
+                <span className="tile-label">{labels[s]}</span>
               </div>
             )
           })}
@@ -181,7 +205,7 @@ function AuditorHome({ me, data }: { me: User; data: AppData }) {
   return (
     <>
       <section className="stack" aria-labelledby="aud-title">
-        <h2 id="aud-title">{t('aud.title')}</h2>
+        <h2 id="aud-title" className="section-title">{t('aud.title')}</h2>
         <div className="grid-2">
           {data.inspectionTemplates.map((tpl) => (
             <article key={tpl.id} className="card task-card">
@@ -218,14 +242,15 @@ function SummaryHome({ me, data }: { me: User; data: AppData }) {
     <>
       <section className="stack" aria-labelledby="sum-title">
         <div className="section-head">
-          <h2 id="sum-title">{t('sum.title')}</h2>
+          <h2 id="sum-title" className="section-title">{t('sum.title')}</h2>
           <span className="muted small">{t(`dept.${me.department}`)}</span>
         </div>
         <div className="tiles">
           {tiles.map((x) => (
             <Link key={x.label} to={`/problems?scope=${me.department === 'all' ? 'all' : 'area'}${x.q}`} className="tile">
+              <span className="tile-icon"><x.icon size={18} aria-hidden /></span>
               <span className={`tile-number ${x.cls}`}>{x.n}</span>
-              <span className="tile-label"><x.icon size={18} aria-hidden />{x.label}</span>
+              <span className="tile-label">{x.label}</span>
             </Link>
           ))}
         </div>
@@ -246,7 +271,7 @@ function ProblemPreview({ title, problems, listLink = '/problems' }: { title: st
   return (
     <section className="stack" aria-label={title}>
       <div className="section-head">
-        <h2>{title}</h2>
+        <h2 className="section-title">{title}</h2>
         <Link to={listLink} className="btn-text">
           {t('problems.count', { n: problems.length })}
           <ChevronRight size={18} aria-hidden className="flip-rtl" />

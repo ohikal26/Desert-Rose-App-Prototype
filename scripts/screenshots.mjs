@@ -44,7 +44,7 @@ for (const [sizeName, viewport] of Object.entries(sizes)) {
       const page = await ctx.newPage()
       await page.goto(`http://localhost:4179/${s.hash ?? ''}`)
       await page.locator('h1:visible').first().waitFor()
-      if (s.click) await page.locator('.who .btn').click()
+      if (s.click) await page.locator('.role-chip').click()
       await page.evaluate(() => document.fonts.ready)
       await page.waitForTimeout(300)
       // Grow the viewport to the page height so the sticky bottom bar lands at the end, as on a device.

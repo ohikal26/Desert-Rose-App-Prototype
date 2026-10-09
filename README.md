@@ -2,7 +2,7 @@
 
 A phone and tablet web app that shows the OE 2.0 idea: shift checklists, inspections on the move, and one problem list. Prototype only, with made-up demo data. The full brief is in [BRIEF.md](BRIEF.md).
 
-**Status:** stage 3 of 6 (problem list). Screenshots are in [docs/screenshots](docs/screenshots), one folder per stage.
+**Status:** stage 3 of 6 (problem list). UI showcase: [docs/ui-showcase](docs/ui-showcase) (key screens in phone frames, English and Arabic). Current screenshots: [docs/screenshots/current](docs/screenshots/current).
 
 ## Run it locally
 
@@ -33,6 +33,7 @@ Upload the `dist/` folder to any static host (Netlify, GitHub Pages, Azure Stati
 | Stage 2 end-to-end check (scan, tick, send back, confirm) | `scripts/e2e/checklists.mjs` (see the comment at the top) |
 | Stage 3 end-to-end check (report, assign, fix, confirm, capex, safety, filters) | `scripts/e2e/problems.mjs scripts/e2e/sample-photo.jpg` |
 | Who may do what on a problem (rules 6–9) | `src/lib/problems.ts` |
+| UI showcase (re-run after design changes) | `npm run build && node scripts/showcase.mjs docs/ui-showcase/raw && node scripts/build-showcase.mjs` |
 | Screenshot script | `scripts/screenshots.mjs` (`npm run build && node scripts/screenshots.mjs <folder>`) |
 
 ## Stack

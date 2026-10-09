@@ -66,7 +66,8 @@ console.log('✓ submit unlocks only when every task is done or has a reason')
 await snap('ready')
 await submit.click()
 await page.waitForSelector('h1:has-text("Hello")')
-assert.ok(await page.locator('article:has-text("Quiet Pool") .chip:has-text("Done")').count())
+const quietRow = '.list-row:has(.list-row-title:text-is("Quiet Pool"))'
+assert.ok(await page.locator(`${quietRow} .chip:has-text("Done")`).count())
 console.log('✓ submitted; home shows Done')
 
 // 5. Hassan sees it waiting for his check and sends it back
@@ -84,9 +85,9 @@ console.log('✓ supervisor sent it back with a note')
 
 // 6. Karim sees the note, fixes and sends again
 await asUser('karim')
-assert.ok(await page.locator('article:has-text("Quiet Pool") .chip:has-text("Sent back")').count())
+assert.ok(await page.locator('.next-card:has-text("Quiet Pool") .chip:has-text("Sent back")').count())
 await snap('employee-sent-back')
-await page.locator('article:has-text("Quiet Pool")').getByRole('link', { name: 'Continue checklist' }).click()
+await page.locator('.next-card').getByRole('link', { name: 'Continue checklist' }).click()
 await page.waitForSelector('.banner-warning')
 await page.waitForSelector('text=Ticking as')  // remembers the initials Karim used on this checklist
 await items.nth(6).click()
@@ -104,7 +105,7 @@ console.log('✓ resent and confirmed: "Result looks right"')
 
 // 8. Karim cannot tick a checked checklist; Sara cannot check a checklist
 await asUser('karim')
-await page.locator('article:has-text("Quiet Pool")').getByRole('link', { name: 'See checklist' }).click()
+await page.locator(quietRow).click()
 assert.equal(await page.locator('.cl-tick').first().isDisabled(), true)
 assert.equal(await page.getByRole('button', { name: 'Submit checklist' }).count(), 0)
 console.log('✓ a checked checklist is read-only')

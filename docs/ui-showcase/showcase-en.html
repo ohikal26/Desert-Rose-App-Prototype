@@ -1,0 +1,67 @@
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Tenor Sans'; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/tenor-sans/files/tenor-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 700; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-700-normal.woff2'); }
+@font-face { font-family: 'Noto Naskh Arabic'; font-weight: 600; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/noto-naskh-arabic/files/noto-naskh-arabic-arabic-600-normal.woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 700; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2'); }
+* { box-sizing: border-box; }
+body { margin: 0; width: 2400px; background: #FAF8F4; color: #1F2A2E;
+  font-family: 'Nunito Sans', sans-serif; }
+header { display: flex; align-items: center; gap: 28px; padding: 64px 96px 40px; }
+header img { height: 88px; }
+h1 { margin: 0; font-family: 'Tenor Sans', serif; font-weight: 400; font-size: 56px; color: #007681; }
+header p { margin: 6px 0 0; font-size: 26px; color: #5F676B; }
+.band { height: 10px; background: linear-gradient(90deg, #007681 0 70%, #E8E3DB 70% 92%, #E05E27 92%); }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 56px 48px; padding: 64px 96px 40px; }
+.phone-fig { margin: 0; display: flex; flex-direction: column; gap: 22px; align-items: center; }
+.phone { width: 400px; padding: 14px; background: #1F2A2E; border-radius: 56px; box-shadow: 0 30px 60px -30px rgba(31,42,46,.45); }
+.phone img { display: block; width: 100%; border-radius: 42px; }
+figcaption { width: 400px; display: flex; flex-direction: column; gap: 6px; font-size: 22px; line-height: 1.45; }
+
+figcaption strong { font-size: 24px; color: #007681; }
+figcaption span { color: #5F676B; }
+.tablet-fig { grid-column: 1 / -1; display: grid; grid-template-columns: 1400px 1fr; align-items: center; gap: 48px; margin-top: 24px !important; }
+.tablet { padding: 16px; background: #1F2A2E; border-radius: 36px; }
+.tablet img { display: block; width: 100%; border-radius: 22px; }
+footer { padding: 24px 96px 64px; font-size: 20px; color: #5F676B; }
+</style></head><body>
+<div class="band"></div>
+<header><img src="../../public/logo/DR_logo_icon.png" alt=""><div><h1>Desert Rose OE</h1><p>How the app could look and work · prototype screens, demo data</p></div></header>
+<div class="grid">
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-1-home.png" alt="Home: employee"></div>
+      <figcaption><strong>Home: employee</strong><span>One clear next step. Today’s checklist sits within reach of the thumb.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-2-checklist.png" alt="Shift checklist"></div>
+      <figcaption><strong>Shift checklist</strong><span>Big rows. Each tick shows initials and time. Progress is a count, never a score.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-3-review.png" alt="Supervisor check"></div>
+      <figcaption><strong>Supervisor check</strong><span>The supervisor checks the place, not the ticks, then confirms or sends back.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-4-problems.png" alt="Problem list"></div>
+      <figcaption><strong>Problem list</strong><span>Safety first, then overdue. Every card shows what, where, who and when.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-5-safety.png" alt="Safety problem"></div>
+      <figcaption><strong>Safety problem</strong><span>What has been done in the meantime always sits on top.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-6-report.png" alt="Report a problem"></div>
+      <figcaption><strong>Report a problem</strong><span>What, where, a photo and two tags. Under a minute.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/en-7-gm.png" alt="Home: general manager"></div>
+      <figcaption><strong>Home: general manager</strong><span>Large numbers. Each one opens the list behind it.</span></figcaption>
+    </figure>
+  <figure class="tablet-fig" style="margin:0">
+    <div class="tablet"><img src="raw/en-tablet.png" alt=""></div>
+    <figcaption style="width:auto"><strong>Tablet</strong><span>On a tablet, the list and the problem sit side by side.</span></figcaption>
+  </figure>
+</div>
+<footer>Prototype with made-up demo data. All names are made up.</footer>
+</body></html>

@@ -26,6 +26,10 @@
   --critical-bg: #FBE7E5;
   --teal-bg: #E3F0F1;
 
+  /* Text on solid teal or critical fills */
+  --on-teal: #FFFFFF;
+  --on-critical: #FFFFFF;
+
   /* Type */
   --font-title: Optima, "Tenor Sans", "Segoe UI", sans-serif;
   --font-body: "Brandon Text", "Nunito Sans", "Segoe UI", sans-serif;

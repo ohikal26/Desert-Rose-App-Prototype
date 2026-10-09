@@ -1,0 +1,67 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Tenor Sans'; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/tenor-sans/files/tenor-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 700; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-700-normal.woff2'); }
+@font-face { font-family: 'Noto Naskh Arabic'; font-weight: 600; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/noto-naskh-arabic/files/noto-naskh-arabic-arabic-600-normal.woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 700; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2'); }
+* { box-sizing: border-box; }
+body { margin: 0; width: 2400px; background: #FAF8F4; color: #1F2A2E;
+  font-family: 'IBM Plex Sans Arabic', 'Nunito Sans', sans-serif; }
+header { display: flex; align-items: center; gap: 28px; padding: 64px 96px 40px; }
+header img { height: 88px; }
+h1 { margin: 0; font-family: 'Tenor Sans', serif; font-weight: 400; font-size: 56px; color: #007681; }
+header p { margin: 6px 0 0; font-size: 26px; color: #5F676B; }
+.band { height: 10px; background: linear-gradient(90deg, #007681 0 70%, #E8E3DB 70% 92%, #E05E27 92%); }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 56px 48px; padding: 64px 96px 40px; }
+.phone-fig { margin: 0; display: flex; flex-direction: column; gap: 22px; align-items: center; }
+.phone { width: 400px; padding: 14px; background: #1F2A2E; border-radius: 56px; box-shadow: 0 30px 60px -30px rgba(31,42,46,.45); }
+.phone img { display: block; width: 100%; border-radius: 42px; }
+figcaption { width: 400px; display: flex; flex-direction: column; gap: 6px; font-size: 22px; line-height: 1.45; }
+figcaption { line-height: 1.7; } h1 { font-family: "Tenor Sans"; }
+figcaption strong { font-size: 24px; color: #007681; }
+figcaption span { color: #5F676B; }
+.tablet-fig { grid-column: 1 / -1; display: grid; grid-template-columns: 1400px 1fr; align-items: center; gap: 48px; margin-top: 24px !important; }
+.tablet { padding: 16px; background: #1F2A2E; border-radius: 36px; }
+.tablet img { display: block; width: 100%; border-radius: 22px; }
+footer { padding: 24px 96px 64px; font-size: 20px; color: #5F676B; }
+</style></head><body>
+<div class="band"></div>
+<header><img src="../../public/logo/DR_logo_icon.png" alt=""><div><h1>Desert Rose OE</h1><p>كيف يمكن أن يبدو التطبيق ويعمل · شاشات النموذج، بيانات تجريبية</p></div></header>
+<div class="grid">
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-1-home.png" alt="الرئيسية: الموظف"></div>
+      <figcaption><strong>الرئيسية: الموظف</strong><span>خطوة تالية واضحة. قائمة مهام اليوم في متناول الإبهام.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-2-checklist.png" alt="قائمة مهام الوردية"></div>
+      <figcaption><strong>قائمة مهام الوردية</strong><span>صفوف كبيرة. كل مهمة تُظهر الأحرف الأولى والوقت. التقدم عدد، وليس تقييماً.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-3-review.png" alt="مراجعة المشرف"></div>
+      <figcaption><strong>مراجعة المشرف</strong><span>يراجع المشرف المكان لا العلامات، ثم يؤكد النتيجة أو يعيدها.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-4-problems.png" alt="قائمة المشكلات"></div>
+      <figcaption><strong>قائمة المشكلات</strong><span>السلامة أولاً ثم المتأخرة. كل بطاقة تُظهر ماذا وأين ومن ومتى.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-5-safety.png" alt="مشكلة سلامة"></div>
+      <figcaption><strong>مشكلة سلامة</strong><span>ما تم فعله في الوقت الحالي يظهر دائماً في الأعلى.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-6-report.png" alt="الإبلاغ عن مشكلة"></div>
+      <figcaption><strong>الإبلاغ عن مشكلة</strong><span>ماذا وأين وصورة ووسمان. في أقل من دقيقة.</span></figcaption>
+    </figure>
+    <figure class="phone-fig">
+      <div class="phone"><img src="raw/ar-7-gm.png" alt="الرئيسية: المدير العام"></div>
+      <figcaption><strong>الرئيسية: المدير العام</strong><span>أرقام كبيرة. كل رقم يفتح القائمة التي خلفه.</span></figcaption>
+    </figure>
+  <figure class="tablet-fig" style="margin:0">
+    <div class="tablet"><img src="raw/ar-tablet.png" alt=""></div>
+    <figcaption style="width:auto"><strong>الجهاز اللوحي</strong><span>على الجهاز اللوحي، تظهر القائمة والمشكلة جنباً إلى جنب.</span></figcaption>
+  </figure>
+</div>
+<footer>نموذج تجريبي ببيانات غير حقيقية. الأسماء من اختراعنا.</footer>
+</body></html>

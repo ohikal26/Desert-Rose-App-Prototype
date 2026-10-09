@@ -213,5 +213,11 @@
   "new.fixFields": "Some details are missing. Check the fields above.",
   "new.send": "Send problem",
   "new.saved": "Problem sent. Thank you.",
-  "filter.more": "More filters"
+  "filter.more": "More filters",
+  "hero.employee": "Checklists left today: {n} · Your problems: {p}",
+  "hero.supervisor": "Checklists waiting for your check: {n}",
+  "hero.auditor": "Inspections ready to start: {n}",
+  "hero.head": "Open problems: {n} · Overdue: {o}",
+  "home.nextUp": "Next up",
+  "home.allDone": "All your checklists are done for today. Thank you."
 }

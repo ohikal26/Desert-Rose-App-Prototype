@@ -8,6 +8,7 @@ import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
 import { BackLink } from '../components/BackLink'
 import { RunStateChip } from '../components/Chips'
+import { Segments } from '../components/Progress'
 import { Sheet } from '../components/Sheet'
 import { PhotoInput, PhotoThumb } from '../components/Photo'
 import { useToast } from '../components/Toast'
@@ -93,6 +94,8 @@ export function ChecklistRun() {
           <span className="muted small">{t(`shift.${run.shift}`)} · {formatDate(run.date)}</span>
           <RunStateChip state={state} />
         </div>
+        <Segments done={run.entries.filter((e) => e.done).length}
+          skipped={run.entries.filter((e) => !e.done && e.couldNotDo).length} total={tpl.items.length} />
       </header>
 
       {run.check && <CheckBanner run={run} />}
