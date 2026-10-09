@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { useData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
@@ -12,6 +13,8 @@ export function RoleSheet({ onClose }: { onClose: () => void }) {
   const { t, userName, jobName } = useI18n()
   const { userId, setUserId } = useAppState()
   const ref = useRef<HTMLDivElement>(null)
+  // Each person starts on their own home screen.
+  const nav = useNavigate()
 
   useEffect(() => {
     ref.current?.focus()
@@ -42,7 +45,7 @@ export function RoleSheet({ onClose }: { onClose: () => void }) {
               {people.map((u) => (
                 <button
                   key={u.id} type="button" className="person-btn" aria-pressed={u.id === userId}
-                  onClick={() => { setUserId(u.id); onClose() }}
+                  onClick={() => { setUserId(u.id); onClose(); nav('/') }}
                 >
                   <span className="avatar" aria-hidden>{u.initials}</span>
                   <span>

@@ -30,6 +30,8 @@ Open the link in Chrome (Android) or Safari (iPhone, iPad), then **Add to Home S
 
 ## Five-minute demo script
 
+A captioned backup recording of this whole script is in [docs/demo-video](docs/demo-video) (2 min 20 s, phone size), in case the live demo hits a problem. The script is also an automated check: `node scripts/e2e/demo-run.mjs` plays every step in the real app and fails if any button named here is missing; `node scripts/e2e/demo-run.mjs <folder>` re-records the video.
+
 Before the demo: open **Settings → Reset demo data**. Stay in English, or switch to Arabic at any point with the button at the top right; every screen works in both.
 
 **1. Karim, pool attendant (1 minute)**
@@ -40,7 +42,7 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 5. Tick tasks 6 and 7. **Submit checklist** is now enabled. Tap it.
 
 **2. Hassan, supervisor (1 minute)**
-1. Tap the name at the top and pick **Hassan**. Home says *1 waiting for your check*.
+1. Tap the name at the top and pick **Hassan**. Switching person always opens that person's home. Home says checklists are *waiting for your check*: Karim's Quiet Pool, and the Activities Pool from earlier this morning.
 2. Tap **Quiet Pool**. Point out: *Check the result, not the ticks.* Tap **Result looks right**.
 3. Tap **Problems** at the bottom. Open **Algae on the drain grid**. Tap **Change owner or due date**, pick **Karim**, keep *tomorrow*, tap **Save**. The history shows *Hassan gave it to Karim*.
 
@@ -54,7 +56,7 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 **4. The rule against confirming your own fix (0.5 minutes)**
 1. Pick **Karim**. Tap **Problems**. Open **Algae on the drain grid**. Tap **Mark as fixed**, then **Mark as fixed** again.
 2. Tap **Confirm fixed**. The app stops him: *You fixed this, so someone else needs to check it.*
-3. Pick **Hassan**. **Problems**, set the status filter to *Fixed, waiting for check*, open the algae problem, tap **Confirm fixed**. Closed and confirmed, with the full history.
+3. Pick **Hassan**. Tap **Problems**, open the algae problem, tap **Confirm fixed**. Closed and confirmed, with the full history.
 
 **5. The general manager (1 minute)**
 1. Pick **Samir**. Home shows the key numbers. Tap **See the full summary**.
@@ -96,6 +98,7 @@ Automated end-to-end checks run the real app in a browser at 360 px. Run them af
 | Inspections: two marks, add as a problem, summary totals | `node scripts/e2e/inspections.mjs` |
 | Offline: service worker, offline tick, offline reload | `node scripts/e2e/offline.mjs` |
 | Leadership: three views in both languages, no overflow at 360 px | `node scripts/e2e/leadership.mjs` |
+| The full demo script, step by step (and the backup video) | `node scripts/e2e/demo-run.mjs [videoFolder]` |
 | Screenshots in both languages at phone and tablet sizes | `node scripts/screenshots.mjs <folder>` |
 | UI showcase sheets | `node scripts/showcase.mjs docs/ui-showcase/raw && node scripts/build-showcase.mjs` |
 

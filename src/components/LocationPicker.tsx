@@ -44,7 +44,10 @@ export function LocationPicker({ filter, mine = [], department, onPick }: Props)
       {myPlaces.length > 0 && <Group title={t('pick.mine')} list={myPlaces} onPick={onPick} name={locName} />}
       {shown.length > 0 && <Group title={t('pick.all')} list={shown} onPick={onPick} name={locName} />}
       {others.length > shown.length && <p className="muted small">{t('pick.more', { n: others.length - shown.length })}</p>}
-      {myPlaces.length === 0 && shown.length === 0 && <p className="muted">{t('pick.none')}</p>}
+      {myPlaces.length === 0 && shown.length === 0 && (
+        // Before typing, rooms are hidden on purpose: say so instead of "no match".
+        <p className="muted">{!query && all.some((l) => l.type === 'room') ? t('pick.typeRoom') : t('pick.none')}</p>
+      )}
     </div>
   )
 }

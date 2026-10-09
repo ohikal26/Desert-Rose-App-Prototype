@@ -320,5 +320,6 @@
   "lead.roadHint": "Upper-upscale needs this close to 10 in 10, and to stay there.",
   "lead.open": "Leadership view",
   "hero.leadSafety": "Safety problems open: {n}. The GM's team is on them.",
-  "hero.leadCalm": "No open safety problems. Here is the week."
+  "hero.leadCalm": "No open safety problems. Here is the week.",
+  "pick.typeRoom": "Type a room number, for example 5212."
 }
