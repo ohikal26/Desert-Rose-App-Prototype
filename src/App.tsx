@@ -16,6 +16,11 @@ import { QrSheet } from './screens/QrSheet'
 import { StartInspection } from './screens/StartInspection'
 import { InspectionRun } from './screens/InspectionRun'
 import { InspectionSummary } from './screens/InspectionSummary'
+import { GatewayBriefing, GatewayHome } from './screens/Gateway'
+import { GatewayDepartment } from './screens/GatewayDepartment'
+import { GatewayGuest } from './screens/GatewayGuest'
+import { GatewayScorecard } from './screens/GatewayScorecard'
+import { GATEWAY_ROLES } from './lib/gateway'
 import { useData } from './data/DataContext'
 import { useAppState } from './state/AppState'
 import { useI18n } from './i18n/I18n'
@@ -67,6 +72,11 @@ function Frame() {
               <Route path="/summary" element={<Summary />} />
               <Route path="/leadership" element={<Leadership />} />
               <Route path="/department/:dept" element={<DepartmentPage />} />
+              <Route path="/gateway" element={<GatewayHome />} />
+              <Route path="/gateway/briefing" element={<GatewayBriefing />} />
+              <Route path="/gateway/dept/:id" element={<GatewayDepartment />} />
+              <Route path="/gateway/guest" element={<GatewayGuest />} />
+              <Route path="/gateway/scorecard" element={<GatewayScorecard />} />
               <Route path="/qr-sheet" element={<QrSheet />} />
               <Route path="/inspections/start/:templateId" element={<StartInspection />} />
               <Route path="/inspection/:runId/summary" element={<InspectionSummary />} />
@@ -75,7 +85,7 @@ function Frame() {
             </Routes>
           )}
         </main>
-        {navClass !== 'hidden' && <BottomNav problemBadge={badge} className={navClass} />}
+        {navClass !== 'hidden' && <BottomNav problemBadge={badge} className={navClass} gateway={!!me && GATEWAY_ROLES.includes(me.role)} />}
       </div>
   )
 }

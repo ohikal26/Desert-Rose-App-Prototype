@@ -132,7 +132,7 @@ export interface Problem {
   owner: string
   due: string // YYYY-MM-DD
   status: ProblemStatus
-  source: 'checklist' | 'inspection' | 'reported'
+  source: 'checklist' | 'inspection' | 'reported' | 'guest'
   sourceItem?: string
   history: HistoryEntry[]
 }

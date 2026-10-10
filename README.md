@@ -72,6 +72,14 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 
 Weeks before the current one are made-up history (`leadershipHistory` in the seed file); the current week comes from the app.
 
+**Excellence Gateway (optional, 2 minutes)** Leaders and the OE team (Sara, Tarek, Laila, Amr, Rania, Samir, CEO, Owner) get a fourth tab, **Gateway**. Line staff and supervisors do not, because it shows money. It follows the structure of Desert Rose's OKR report: four perspectives (Financial, Guest experience, Operational excellence, People & culture), each key result with actual, target, share of target, and a status (Met, Close, Behind, At risk). All numbers are made up.
+- **Dashboard**: the overall score against target, the four perspectives, what needs attention, the financial headline, guest, operations and people key results, live numbers from the OE app, and every department in the OKR report's order (not ranked).
+- **Morning briefing**: one tile per department plus the GM. Each opens a one-page briefing: scores, today in the OE app (same counts and words as the department overview), guest concerns from yesterday and this month, and issues to discuss. Show **Recreation**, then tap **Add as a problem** on the broken tile concern: the problem form opens with the place, kind and words filled in, and once sent the briefing links to it.
+- **Guest feedback**: each source with its score, review count, and how far it can be trusted (our own guests, stay required, open to anyone).
+- **Scorecard (draft)**: which key results could later count towards bonuses, the rules for choosing them, and what must never count (problems reported, checklists ticked, any one person's numbers). No amounts and no names.
+
+Only Recreation and Housekeeping show full key results and concerns; they are the departments the OE app covers.
+
 **6. Arabic (throughout)** Tap **العربية** at the top right. The same screen appears in Arabic, right to left.
 
 ## Where things are
@@ -86,6 +94,7 @@ Weeks before the current one are made-up history (`leadershipHistory` in the see
 | The two inspection totals (rule 4) | `src/lib/inspections.ts` |
 | The one-page summary numbers | `src/lib/summary.ts` |
 | Leadership views (GM, CEO, Owner) | `src/lib/leadership.ts`, `src/screens/Leadership.tsx` |
+| Excellence Gateway (demo KPI data, dashboard, briefings, guest feedback, scorecard) | `src/data/gateway.json`, `src/lib/gateway.ts`, `src/components/Kpi.tsx`, `src/screens/Gateway*.tsx` |
 | Department overview (directors) | `src/lib/department.ts`, `src/screens/DepartmentOverview.tsx` |
 | Brand logo files | `assets/` (web copies made by `npm run icons`) |
 | Publishing workflow | `.github/workflows/pages.yml` |
@@ -101,6 +110,7 @@ Automated end-to-end checks run the real app in a browser at 360 px. Run them af
 | Inspections: two marks, add as a problem, summary totals | `node scripts/e2e/inspections.mjs` |
 | Offline: service worker, offline tick, offline reload | `node scripts/e2e/offline.mjs` |
 | Leadership and directors: all views in both languages, no overflow at 360 px | `node scripts/e2e/leadership.mjs` |
+| Excellence Gateway: every page in both languages at 360 and 1024 px, who sees the tab, a guest concern becomes a problem | `node scripts/e2e/gateway.mjs [screenshotDir]` |
 | The full demo script, step by step (and the backup video) | `node scripts/e2e/demo-run.mjs [videoFolder]` |
 | Screenshots in both languages at phone and tablet sizes | `node scripts/screenshots.mjs <folder>` |
 | UI showcase sheets | `node scripts/showcase.mjs docs/ui-showcase/raw && node scripts/build-showcase.mjs` |
@@ -116,4 +126,5 @@ React with TypeScript, built with Vite. Data is kept on the device in IndexedDB 
 - No horizontal logo file was supplied, so the header shows the icon alone. Add `assets/DR_logo_horizontal.png`, run `npm run icons`, and change `HEADER_LOGO` in `src/components/Header.tsx`.
 - Seed problems have no photos; anything reported during the demo has its photo.
 - The QR sheet shows one code per building; the real tool would print one per room.
+- Gateway numbers are made up and fixed (Jan–Sep 2026). The real Gateway would read them from Finance, the OKR report and the review platforms. The live link is public, so real figures should only go in once it is private.
 - "Sync" is simulated: there is no server, so the indicator only reports whether the device is online.

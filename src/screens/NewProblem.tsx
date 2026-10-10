@@ -64,10 +64,10 @@ export function NewProblem() {
   const inspectionId = params.get('inspection') ?? undefined
   const inspection = inspectionId ? data?.inspectionRuns.find((r) => r.id === inspectionId) : undefined
   const inspEntry = inspection?.entries.find((e) => e.itemId === itemId)
-  const [title, setTitle] = useState(inspEntry?.note ?? '')
+  const [title, setTitle] = useState(inspEntry?.note ?? params.get('title') ?? '')
   const [locId, setLocId] = useState<string | undefined>(params.get('location') ?? undefined)
   const [photo, setPhoto] = useState<string | undefined>(inspEntry?.photo)
-  const [kind, setKind] = useState<ProblemKind>()
+  const [kind, setKind] = useState<ProblemKind | undefined>((params.get('kind') as ProblemKind) ?? undefined)
   const [safety, setSafety] = useState(false)
   const [interim, setInterim] = useState('')
   const loc = locId ? location(locId) : undefined

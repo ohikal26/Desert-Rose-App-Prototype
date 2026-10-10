@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import { Home, ListChecks, Settings } from 'lucide-react'
+import { Gauge, Home, ListChecks, Settings } from 'lucide-react'
 import { useI18n } from '../i18n/I18n'
 
-export function BottomNav({ problemBadge, className = '' }: { problemBadge: number; className?: string }) {
+export function BottomNav({ problemBadge, className = '', gateway }: { problemBadge: number; className?: string; gateway?: boolean }) {
   const { t } = useI18n()
   return (
     <nav className={`bottom-nav ${className}`} aria-label={t('nav.main')}>
@@ -15,6 +15,7 @@ export function BottomNav({ problemBadge, className = '' }: { problemBadge: numb
             {problemBadge > 0 && <span className="nav-badge" aria-label={t('nav.badge', { n: problemBadge })}>{problemBadge}</span>}
           </NavLink>
         </li>
+        {gateway && <li><NavLink to="/gateway"><Gauge size={24} aria-hidden />{t('nav.gateway')}</NavLink></li>}
         <li><NavLink to="/settings"><Settings size={24} aria-hidden />{t('nav.settings')}</NavLink></li>
       </ul>
     </nav>
