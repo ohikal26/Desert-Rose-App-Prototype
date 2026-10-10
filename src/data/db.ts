@@ -1,6 +1,7 @@
 // All data lives on the device in IndexedDB. No server.
 import { openDB, type IDBPDatabase } from 'idb'
 import { expandSeed } from './expandSeed'
+import seed from './seed.json'
 
 export const STORES = [
   'users', 'locations', 'checklistTemplates', 'inspectionTemplates',
@@ -10,6 +11,15 @@ export type StoreName = (typeof STORES)[number]
 
 const DB_NAME = 'desert-rose-oe'
 const DB_VERSION = 1
+
+// A fingerprint of the seed file. When the demo data changes in a new version of the app,
+// devices that opened an older version load the new data on their own.
+const SEED_VERSION = (() => {
+  const text = JSON.stringify(seed)
+  let h = 0
+  for (let i = 0; i < text.length; i++) h = (h * 31 + text.charCodeAt(i)) | 0
+  return String(h)
+})()
 
 let dbPromise: Promise<IDBPDatabase> | null = null
 
@@ -42,10 +52,11 @@ export async function loadSeed(): Promise<void> {
   const rows: Record<StoreName, unknown[]> = { ...data, inspectionRuns: [] }
   for (const s of STORES) for (const r of rows[s]) await tx.objectStore(s).put(r)
   await tx.objectStore('meta').put(new Date().toISOString(), 'seededAt')
+  await tx.objectStore('meta').put(SEED_VERSION, 'seedVersion')
   await tx.done
 }
 
 export async function ensureSeeded(): Promise<void> {
-  const seededAt = await (await db()).get('meta', 'seededAt')
-  if (!seededAt) await loadSeed()
+  const version = await (await db()).get('meta', 'seedVersion')
+  if (version !== SEED_VERSION) await loadSeed()
 }
