@@ -22,7 +22,7 @@ for (const [lang, vp, size] of [['en', { width: 360, height: 640 }, 'phone'], ['
     if (shots) await page.screenshot({ path: `${shots}/${size}-${lang}-${view}.png`, fullPage: true })
   }
   // Directors land on their department overview; the GM opens either department from the GM view
-  for (const [user, title] of [['amr', lang === 'en' ? 'Entertainment' : 'الترفيه'], ['rania', lang === 'en' ? 'Housekeeping' : 'التدبير']]) {
+  for (const [user, title] of [['amr', lang === 'en' ? 'Recreation' : 'المسابح'], ['rania', lang === 'en' ? 'Housekeeping' : 'التدبير']]) {
     await page.evaluate((u) => localStorage.setItem('dr.user', u), user)
     await page.goto('http://localhost:4179/#/'); await page.reload(); await page.locator('h1:visible').first().waitFor(); await page.waitForTimeout(500)
     assert.ok(await page.locator('#d-today').count(), `${user}: department overview on home`)

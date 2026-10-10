@@ -7,7 +7,7 @@
       "initials": "KA",
       "role": "employee",
       "department": "recreation",
-      "job": "Pool attendant",
+      "job": "Pool & beach attendant",
       "locations": [
         "quiet-pool",
         "towel-quiet-pool"
@@ -73,7 +73,7 @@
       "initials": "AM",
       "role": "director",
       "department": "recreation",
-      "job": "Director of Entertainment"
+      "job": "Director of Recreation"
     },
     {
       "id": "rania",
