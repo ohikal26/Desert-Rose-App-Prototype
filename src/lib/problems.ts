@@ -27,7 +27,7 @@ export function fixerOf(p: Problem): string | undefined {
 
 export type Verdict = { ok: true } | { ok: false; reason: 'self-fix' | 'role' | 'team' }
 
-const MANAGERS = ['supervisor', 'head', 'gm', 'auditor']
+const MANAGERS = ['supervisor', 'head', 'director', 'gm', 'auditor']
 
 function sameArea(me: User, loc?: Location): boolean {
   return me.department === 'all' || me.department === 'oe' || me.department === loc?.department

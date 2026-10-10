@@ -63,10 +63,12 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 2. Point out: old and renovated areas apart, condition and care apart, and the repeat at Room 5212.
 3. Tap the **Safety** tile. The list shows safety problems first. Open **Broken tiles inside the pool** (Zaitouna Pool): the interim note *Area roped off* sits at the top.
 
+**Directors (optional, 1 minute)** Pick **Amr** (Director of Entertainment) or **Rania** (Director of Housekeeping). Their home is the department overview, looked at every morning and in the weekly department meeting: safety, today's checklists (done, sent back, not started), fixes nobody has checked for over a day, how long open problems have waited, where problems cluster, the 9-week trend, typical days to fix, both inspection totals, and the department's capex items. Counts are by place and kind, never by person. The managers Tarek and Laila report to them.
+
 **Leadership page (optional, 1 minute)** Pick **Samir** and tap **Leadership view**, or pick **CEO** or **Owner** from the name menu. Three tabs show what each person looks at, and how often:
-- **GM**, every morning: safety now, each department today, and overdue problems that need a push.
-- **CEO**, a daily glance plus the weekly trend: safety and overdue against last week, open and overdue over 9 weeks, the two inspection totals, care against condition.
-- **Owner**, weekly: safety in one line, the capex list by building, whether renovated areas hold up, and progress toward 2031.
+- **GM**, every morning: safety now; each department today, with places not started and a link to each department overview; overdue problems that need a push; fixes nobody has checked; how long problems have waited; where problems cluster; inspections this week.
+- **CEO**, a daily glance plus the weekly trend: safety and overdue against last week, things worth a question, open and overdue over 9 weeks, the two inspection totals, care against condition, open problems by department, and how fast problems get fixed.
+- **Owner**, weekly: safety in one line, the capex list by building and over time, room problems per 100 rooms by building, each department in one line, and progress toward 2031.
 
 Weeks before the current one are made-up history (`leadershipHistory` in the seed file); the current week comes from the app.
 
@@ -84,6 +86,7 @@ Weeks before the current one are made-up history (`leadershipHistory` in the see
 | The two inspection totals (rule 4) | `src/lib/inspections.ts` |
 | The one-page summary numbers | `src/lib/summary.ts` |
 | Leadership views (GM, CEO, Owner) | `src/lib/leadership.ts`, `src/screens/Leadership.tsx` |
+| Department overview (directors) | `src/lib/department.ts`, `src/screens/DepartmentOverview.tsx` |
 | Brand logo files | `assets/` (web copies made by `npm run icons`) |
 | Publishing workflow | `.github/workflows/pages.yml` |
 
@@ -97,7 +100,7 @@ Automated end-to-end checks run the real app in a browser at 360 px. Run them af
 | Problems: report, assign, fix, confirm (not your own), capex, safety, filters | `node scripts/e2e/problems.mjs scripts/e2e/sample-photo.jpg` |
 | Inspections: two marks, add as a problem, summary totals | `node scripts/e2e/inspections.mjs` |
 | Offline: service worker, offline tick, offline reload | `node scripts/e2e/offline.mjs` |
-| Leadership: three views in both languages, no overflow at 360 px | `node scripts/e2e/leadership.mjs` |
+| Leadership and directors: all views in both languages, no overflow at 360 px | `node scripts/e2e/leadership.mjs` |
 | The full demo script, step by step (and the backup video) | `node scripts/e2e/demo-run.mjs [videoFolder]` |
 | Screenshots in both languages at phone and tablet sizes | `node scripts/screenshots.mjs <folder>` |
 | UI showcase sheets | `node scripts/showcase.mjs docs/ui-showcase/raw && node scripts/build-showcase.mjs` |

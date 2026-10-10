@@ -1,12 +1,13 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import {
-  AlertTriangle, Archive, ArrowDown, ArrowUp, CalendarClock, CircleCheck, Clock, Eye, ListChecks, Minus,
-  ShieldCheck, Target, Wrench,
+  AlertTriangle, Archive, ArrowDown, ArrowUp, Building2, CalendarClock, ChevronRight, CircleCheck, Clock, Eye, Hourglass,
+  ListChecks, MapPin, Minus, Search, ShieldCheck, Target, Wrench,
 } from 'lucide-react'
 import { useData } from '../data/DataContext'
 import { useI18n } from '../i18n/I18n'
 import { useAppState } from '../state/AppState'
 import { LineChart } from '../components/LineChart'
+import { Bars } from '../components/Bars'
 import { ceoView, gmView, ownerView } from '../lib/leadership'
 import type { Problem, Role } from '../types'
 
@@ -115,7 +116,11 @@ function GmView() {
                 <div><dt><Wrench size={16} aria-hidden />{t('sum.fixedWaiting')}</dt><dd>{d.waiting}</dd></div>
               </dl>
               <p className="small muted">{t('lead.checklistsLine', { done: d.done, prog: d.inProgress, back: d.sentBack })}</p>
-              <Link to={`/problems?scope=all&status=active`} className="btn-text small">{t('lead.seeList')}</Link>
+              {(() => {
+                const ns = v.notStarted.find((x) => x.dept === d.dept)!.slots
+                return ns.length > 0 && <p className="small">{t('dept.notStarted', { n: ns.length })}: <span className="muted">{ns.map((x) => locName(x.location)).join(', ')}</span></p>
+              })()}
+              <Link to={`/department/${d.dept}`} className="btn btn-secondary btn-block">{t('dept.open')}<ChevronRight size={18} aria-hidden className="flip-rtl" /></Link>
             </div>
           ))}
         </div>
@@ -140,6 +145,33 @@ function GmView() {
           </ul>
         )}
       </section>
+      <section className="card stack" aria-labelledby="gm-stuck">
+        <h2 id="gm-stuck" className="section-title row-inline"><Hourglass size={20} aria-hidden />{t('dept.stuckTitle')}</h2>
+        <p className="muted small">{t('dept.stuckHint')}</p>
+        {v.stuck.length === 0 ? <p className="small">{t('dept.noStuck')}</p> : (
+          <ul className="list">{v.stuck.map((p) => (
+            <li key={p.id}><Link to={`/problems/${p.id}`} className="list-row link-row">
+              <div className="list-row-main"><div className="list-row-title">{problemTitle(p)}</div><div className="small muted">{locName(location(p.location))}</div></div>
+            </Link></li>))}
+          </ul>
+        )}
+        <h3 className="field-label">{t('dept.ageTitle')}</h3>
+        <Bars bars={v.ageing.map((a) => ({ key: a.key, label: t(`age.${a.key}`), n: a.n, tone: a.key === '15+' ? 'critical' : a.key === '8-14' ? 'stone' : 'teal' }))} />
+      </section>
+
+      <section className="card stack" aria-labelledby="gm-hot">
+        <h2 id="gm-hot" className="section-title row-inline"><MapPin size={20} aria-hidden />{t('dept.hotTitle')}</h2>
+        <p className="muted small">{t('dept.hotHint')}</p>
+        <Bars bars={v.hotspots.map((h) => ({ key: h.place.id, label: locName(h.place), n: h.n, to: '/problems?scope=all' }))} />
+      </section>
+
+      <section className="card stack-sm" aria-labelledby="gm-insp">
+        <h2 id="gm-insp" className="section-title row-inline"><Search size={20} aria-hidden />{t('lead.inspWeek')}</h2>
+        {v.inspections
+          ? <p>{t('lead.inspThisWeek', { runs: v.inspections.runs, s: v.inspections.stepsIn10, r: v.inspections.resultGoodIn10 })}</p>
+          : <p className="small muted">{t('lead.inspNone')}</p>}
+      </section>
+
       <Link to="/summary" className="btn btn-secondary btn-block">{t('sum.full')}</Link>
     </>
   )
@@ -150,6 +182,7 @@ function CeoView() {
   const { t } = useI18n()
   const v = ceoView(data!)
   const labels = useWeekLabels(v.weeks.map((w) => w.start))
+  const pastLabels = useWeekLabels([...v.pastWeeks.map((w) => w.start), '']).slice(0, -1)
   const insp = v.inspections
   return (
     <>
@@ -228,6 +261,28 @@ function CeoView() {
         </div>
         <p className="muted small">{t('lead.kindHint')}</p>
       </section>
+
+      <section className="card stack" aria-labelledby="ceo-depts">
+        <h2 id="ceo-depts" className="section-title">{t('lead.deptTrend')}</h2>
+        <p className="muted small">{t('lead.deptTrendHint')}</p>
+        <LineChart title={t('lead.deptTrend')} xLabels={labels} series={[
+          { key: 'rec', label: t('dept.recreation'), color: 'var(--teal)', values: [...v.pastWeeks.map((w) => w.byDept.recreation.open), v.deptNow[0].open] },
+          { key: 'hk', label: t('dept.housekeeping'), color: 'var(--stone)', values: [...v.pastWeeks.map((w) => w.byDept.housekeeping.open), v.deptNow[1].open] },
+        ]} />
+        <div className="row">
+          <Link to="/department/recreation" className="btn-text small">{t('dept.recreation')}<ChevronRight size={16} aria-hidden className="flip-rtl" /></Link>
+          <Link to="/department/housekeeping" className="btn-text small">{t('dept.housekeeping')}<ChevronRight size={16} aria-hidden className="flip-rtl" /></Link>
+        </div>
+      </section>
+
+      <section className="card stack" aria-labelledby="ceo-speed">
+        <h2 id="ceo-speed" className="section-title">{t('lead.speedTitle')}</h2>
+        <p className="muted small">{t('lead.speedHint')}</p>
+        <LineChart title={t('lead.speedTitle')} unit="" xLabels={pastLabels} series={[
+          { key: 'days', label: t('lead.daysToFix'), color: 'var(--teal)', values: v.pastWeeks.map((w) => w.daysToFix) },
+        ]} />
+        <p className="small">{t('lead.speedRead', { from: v.pastWeeks[0].daysToFix, to: v.pastWeeks[v.pastWeeks.length - 1].daysToFix })}</p>
+      </section>
     </>
   )
 }
@@ -292,9 +347,47 @@ function OwnerView() {
         <p className="small">{t('lead.areasRead')}</p>
       </section>
 
-      <section className="card stack-sm" aria-labelledby="own-2031">
+      <section className="card stack" aria-labelledby="own-capex-trend">
+        <h2 id="own-capex-trend" className="section-title">{t('lead.capexTrend')}</h2>
+        <p className="muted small">{t('lead.capexTrendHint')}</p>
+        <LineChart title={t('lead.capexTrend')} xLabels={labels} series={[
+          { key: 'capex', label: t('lead.capexItems'), color: 'var(--stone)', values: v.capexTrend },
+        ]} />
+      </section>
+
+      <section className="card stack" aria-labelledby="own-buildings">
+        <h2 id="own-buildings" className="section-title row-inline"><Building2 size={20} aria-hidden />{t('lead.buildingsTitle')}</h2>
+        <p className="muted small">{t('lead.buildingsHint')}</p>
+        <Bars bars={v.buildings.map((b) => ({
+          key: String(b.building), n: b.rate, tone: b.old ? 'stone' : 'teal',
+          label: `${locName(location(`building-${b.building}`))}${b.old ? ` · ${t('tag.old')}` : ''}`,
+        }))} />
+        <p className="small">{t('lead.buildingsRead')}</p>
+      </section>
+
+      <section className="card stack-sm" aria-labelledby="own-depts">
+        <h2 id="own-depts" className="section-title">{t('lead.deptsWeek')}</h2>
+        <ul className="list">
+          {v.depts.map((d) => (
+            <li key={d.dept}>
+              <Link to={`/department/${d.dept}`} className="list-row link-row">
+                <div className="list-row-main">
+                  <div className="list-row-title">{t(`dept.${d.dept}`)}</div>
+                  <div className="small muted">{t('lead.deptLine', { open: d.open, overdue: d.overdue, r: d.resultGoodIn10 })}</div>
+                </div>
+                <ChevronRight size={20} aria-hidden className="flip-rtl muted" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="card stack" aria-labelledby="own-2031">
         <h2 id="own-2031" className="section-title row-inline"><Target size={20} aria-hidden />{t('lead.road')}</h2>
         <p>{t('lead.roadLine', { from: v.firstWeek.resultGoodIn10, to: v.lastWeek.resultGoodIn10 })}</p>
+        <LineChart title={t('lead.road')} xLabels={labels.slice(0, -1)} series={[
+          { key: 'res', label: t('insp.resultGood'), color: 'var(--teal)', values: v.weeks.slice(0, -1).map((w) => w.resultGoodIn10 ?? 0) },
+        ]} />
         <p className="muted small">{t('lead.roadHint')}</p>
       </section>
     </>

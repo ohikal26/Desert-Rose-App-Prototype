@@ -1,5 +1,5 @@
 export type Lang = 'en' | 'ar'
-export type Role = 'employee' | 'supervisor' | 'auditor' | 'head' | 'gm' | 'ceo' | 'owner'
+export type Role = 'employee' | 'supervisor' | 'auditor' | 'head' | 'director' | 'gm' | 'ceo' | 'owner'
 export type Department = 'recreation' | 'housekeeping' | 'oe' | 'all'
 export type Shift = 'morning' | 'evening' | 'night'
 export type LocationType =

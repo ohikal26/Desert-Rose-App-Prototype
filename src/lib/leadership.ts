@@ -5,6 +5,8 @@ import { addDays, dayKey, todayKey } from './dates'
 import { isActive, shownStatus } from './problems'
 import { runState } from './checklists'
 import { totals } from './inspections'
+import { ageing, hotspots, stuckChecks } from './department'
+import { teamChecklists } from './checklists'
 
 export interface Week {
   /** First day of the 7-day week, counting back from today. */
@@ -86,6 +88,11 @@ export function gmView(data: AppData) {
       }
     }),
     push: active.filter((p) => shownStatus(p, today) === 'overdue').sort((a, b) => a.due.localeCompare(b.due)).slice(0, 5),
+    notStarted: depts.map((d) => ({ dept: d, slots: teamChecklists(d, data).filter((s) => s.state === 'not-started') })),
+    stuck: stuckChecks(active),
+    ageing: ageing(active),
+    hotspots: hotspots(data, active),
+    inspections: inspectionsThisWeek(data),
   }
 }
 
@@ -108,6 +115,10 @@ export function ceoView(data: AppData) {
     care: active.filter((p) => p.kind === 'care').length,
     exceptions,
     inspections: { firstWeek: history[0], lastWeek: lastFull, thisWeek: inspectionsThisWeek(data) },
+    pastWeeks: history.map((w) => ({ ...w, start: dayKey(addDays(new Date(), w.week * 7 - 6)) })),
+    deptNow: (['recreation', 'housekeeping'] as const).map((d) => ({
+      dept: d, open: active.filter((p) => deptOf(data, p) === d).length,
+    })),
   }
 }
 
@@ -129,6 +140,15 @@ export function ownerView(data: AppData) {
       .sort((a, b) => b.list.length - a.list.length),
     capexNewThisWeek: capex.filter((p) => ageDays(p) <= 7).length,
     firstWeek: history[0], lastWeek: history[history.length - 1],
+    capexTrend: [...history.map((w) => w.capexOpen), capex.length],
+    buildings: Object.entries(seed.leadershipHistory.buildingsLast12Weeks).filter(([k]) => !k.startsWith('_'))
+      .map(([b, rate]) => ({ building: Number(b), rate: rate as number, old: seed.housekeeping.oldBuildings.includes(Number(b)) }))
+      .sort((a, b) => b.rate - a.rate),
+    depts: (['recreation', 'housekeeping'] as const).map((d) => {
+      const list = active.filter((p) => deptOf(data, p) === d)
+      const lw = history[history.length - 1].byDept[d]
+      return { dept: d, open: list.length, overdue: list.filter((p) => shownStatus(p) === 'overdue').length, resultGoodIn10: lw.resultGoodIn10 }
+    }),
   }
 }
 

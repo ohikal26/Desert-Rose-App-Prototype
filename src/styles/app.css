@@ -695,3 +695,15 @@ textarea.input { min-height: 96px; resize: vertical; }
 .chart-table { width: 100%; border-collapse: collapse; font-size: var(--fs-label); }
 .chart-table th, .chart-table td { padding: 6px 8px; border-bottom: 1px solid var(--hairline); text-align: start; }
 .chart-table td { font-variant-numeric: tabular-nums; }
+
+/* ---------- Department overview ---------- */
+.bar-tone-teal { background: var(--teal); }
+.bar-tone-stone { background: var(--stone); }
+.bar-tone-sage { background: var(--sage); }
+.bar-tone-critical { background: var(--critical); }
+.bars .bar-row { grid-template-columns: minmax(96px, 40%) 1fr 40px; }
+.today-strip { display: flex; gap: 3px; flex-wrap: wrap; }
+.today-seg { flex: 1 0 14px; height: 14px; border-radius: 4px; background: var(--pearl); }
+.today-seg.is-done { background: var(--good); }
+.today-seg.is-prog { background: var(--teal); }
+.today-seg.is-back { background: var(--warning); }

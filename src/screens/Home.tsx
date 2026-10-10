@@ -10,6 +10,7 @@ import { RunStateChip, RUN_ICON, type RunState } from '../components/Chips'
 import { ProblemCard } from '../components/ProblemCard'
 import { Segments } from '../components/Progress'
 import { Leadership } from './Leadership'
+import { DepartmentOverview } from './DepartmentOverview'
 import { myChecklists, teamChecklists } from '../lib/checklists'
 import { isActive, shownStatus, sortProblems } from '../lib/problems'
 import { todayKey } from '../lib/dates'
@@ -37,6 +38,7 @@ export function Home() {
       {me.role === 'auditor' && <AuditorHome me={me} data={data} />}
       {(me.role === 'head' || me.role === 'gm') && <SummaryHome me={me} data={data} />}
       {(me.role === 'ceo' || me.role === 'owner') && <Leadership />}
+      {me.role === 'director' && <DepartmentOverview dept={me.department as 'recreation' | 'housekeeping'} embedded />}
     </>
   )
 }
@@ -54,6 +56,10 @@ function heroLine(me: User, data: AppData, t: (k: string, v?: Record<string, str
     return t('hero.supervisor', { n: waiting })
   }
   if (me.role === 'auditor') return t('hero.auditor', { n: data.inspectionTemplates.length })
+  if (me.role === 'director') {
+    const list = data.problems.filter((p) => isActive(p) && deptOf(p) === me.department)
+    return t('hero.director', { d: t(`dept.${me.department}`), n: list.length, o: list.filter((p) => shownStatus(p) === 'overdue').length })
+  }
   if (me.role === 'ceo' || me.role === 'owner') {
     const safety = data.problems.filter((p) => isActive(p) && p.safety).length
     return safety ? t('hero.leadSafety', { n: safety }) : t('hero.leadCalm')

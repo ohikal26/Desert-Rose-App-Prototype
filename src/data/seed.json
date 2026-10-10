@@ -68,6 +68,22 @@
       "job": "Housekeeping manager"
     },
     {
+      "id": "amr",
+      "name": "Amr",
+      "initials": "AM",
+      "role": "director",
+      "department": "recreation",
+      "job": "Director of Entertainment"
+    },
+    {
+      "id": "rania",
+      "name": "Rania",
+      "initials": "RA",
+      "role": "director",
+      "department": "housekeeping",
+      "job": "Director of Housekeeping"
+    },
+    {
       "id": "samir",
       "name": "Samir",
       "initials": "SM",
@@ -577,11 +593,11 @@
       "kind": "care",
       "status": "fixed",
       "dueDay": 0,
-      "createdDay": -2,
+      "createdDay": -4,
       "owner": "mona",
       "createdBy": "nadia",
       "source": "checklist",
-      "fixedDay": 0
+      "fixedDay": -2
     },
     {
       "id": "p-03",
@@ -835,10 +851,46 @@
       "owner": "laila",
       "createdBy": "nadia",
       "source": "reported"
+    },
+    {
+      "id": "p-23",
+      "title": "Stained bed linen",
+      "location": "room-5214",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 0,
+      "createdDay": -1,
+      "owner": "mona",
+      "createdBy": "nadia",
+      "source": "checklist"
+    },
+    {
+      "id": "p-24",
+      "title": "Kettle missing from the tray",
+      "location": "room-5110",
+      "kind": "care",
+      "status": "open",
+      "dueDay": 1,
+      "createdDay": 0,
+      "owner": "mona",
+      "createdBy": "sara",
+      "source": "inspection"
+    },
+    {
+      "id": "p-25",
+      "title": "Sunbed strap broken",
+      "location": "quiet-pool",
+      "kind": "condition",
+      "status": "open",
+      "dueDay": 3,
+      "createdDay": -11,
+      "owner": "hassan",
+      "createdBy": "karim",
+      "source": "reported"
     }
   ],
   "leadershipHistory": {
-    "_note": "Made-up weekly history for the leadership trends: one row per past week, oldest first (week -8 to week -1). The current week is worked out live from the app's data. Rates are out of 10 inspection items.",
+    "_note": "Made-up weekly history for the leadership trends: one row per past week, oldest first (week -8 to week -1). The current week is worked out live from the app's data. Rates are out of 10 inspection items. byDept splits each week by department. daysToFix is the typical (median) number of days from report to confirmed fix. capexOpen is the size of the capex list that week.",
     "weeks": [
       {
         "week": -8,
@@ -850,7 +902,29 @@
         "stepsIn10": 8.6,
         "resultGoodIn10": 7.1,
         "oldPer100": 2.0,
-        "renovatedPer100": 0.7
+        "renovatedPer100": 0.7,
+        "daysToFix": 4.8,
+        "capexOpen": 3,
+        "byDept": {
+          "recreation": {
+            "open": 12,
+            "overdue": 4,
+            "closed": 8,
+            "closedOnTime": 6,
+            "stepsIn10": 8.4,
+            "resultGoodIn10": 7.3,
+            "daysToFix": 4.4
+          },
+          "housekeeping": {
+            "open": 14,
+            "overdue": 4,
+            "closed": 10,
+            "closedOnTime": 7,
+            "stepsIn10": 8.8,
+            "resultGoodIn10": 6.9,
+            "daysToFix": 5.2
+          }
+        }
       },
       {
         "week": -7,
@@ -862,7 +936,29 @@
         "stepsIn10": 8.8,
         "resultGoodIn10": 7.2,
         "oldPer100": 2.1,
-        "renovatedPer100": 0.8
+        "renovatedPer100": 0.8,
+        "daysToFix": 4.6,
+        "capexOpen": 3,
+        "byDept": {
+          "recreation": {
+            "open": 11,
+            "overdue": 4,
+            "closed": 9,
+            "closedOnTime": 7,
+            "stepsIn10": 8.6,
+            "resultGoodIn10": 7.4,
+            "daysToFix": 4.2
+          },
+          "housekeeping": {
+            "open": 13,
+            "overdue": 5,
+            "closed": 11,
+            "closedOnTime": 8,
+            "stepsIn10": 9.0,
+            "resultGoodIn10": 7.0,
+            "daysToFix": 5.0
+          }
+        }
       },
       {
         "week": -6,
@@ -874,7 +970,29 @@
         "stepsIn10": 8.7,
         "resultGoodIn10": 7.4,
         "oldPer100": 1.9,
-        "renovatedPer100": 0.8
+        "renovatedPer100": 0.8,
+        "daysToFix": 4.5,
+        "capexOpen": 4,
+        "byDept": {
+          "recreation": {
+            "open": 12,
+            "overdue": 3,
+            "closed": 8,
+            "closedOnTime": 6,
+            "stepsIn10": 8.6,
+            "resultGoodIn10": 7.5,
+            "daysToFix": 4.1
+          },
+          "housekeeping": {
+            "open": 13,
+            "overdue": 4,
+            "closed": 9,
+            "closedOnTime": 7,
+            "stepsIn10": 8.8,
+            "resultGoodIn10": 7.3,
+            "daysToFix": 4.9
+          }
+        }
       },
       {
         "week": -5,
@@ -886,7 +1004,29 @@
         "stepsIn10": 9.0,
         "resultGoodIn10": 7.6,
         "oldPer100": 1.8,
-        "renovatedPer100": 0.9
+        "renovatedPer100": 0.9,
+        "daysToFix": 4.1,
+        "capexOpen": 4,
+        "byDept": {
+          "recreation": {
+            "open": 10,
+            "overdue": 3,
+            "closed": 9,
+            "closedOnTime": 8,
+            "stepsIn10": 8.9,
+            "resultGoodIn10": 7.7,
+            "daysToFix": 3.7
+          },
+          "housekeeping": {
+            "open": 12,
+            "overdue": 4,
+            "closed": 12,
+            "closedOnTime": 9,
+            "stepsIn10": 9.1,
+            "resultGoodIn10": 7.5,
+            "daysToFix": 4.5
+          }
+        }
       },
       {
         "week": -4,
@@ -898,7 +1038,29 @@
         "stepsIn10": 9.1,
         "resultGoodIn10": 7.8,
         "oldPer100": 1.7,
-        "renovatedPer100": 0.9
+        "renovatedPer100": 0.9,
+        "daysToFix": 3.9,
+        "capexOpen": 5,
+        "byDept": {
+          "recreation": {
+            "open": 9,
+            "overdue": 3,
+            "closed": 9,
+            "closedOnTime": 7,
+            "stepsIn10": 9.0,
+            "resultGoodIn10": 7.9,
+            "daysToFix": 3.5
+          },
+          "housekeeping": {
+            "open": 11,
+            "overdue": 3,
+            "closed": 10,
+            "closedOnTime": 9,
+            "stepsIn10": 9.2,
+            "resultGoodIn10": 7.7,
+            "daysToFix": 4.3
+          }
+        }
       },
       {
         "week": -3,
@@ -910,11 +1072,33 @@
         "stepsIn10": 9.2,
         "resultGoodIn10": 7.9,
         "oldPer100": 1.6,
-        "renovatedPer100": 1.0
+        "renovatedPer100": 1.0,
+        "daysToFix": 3.6,
+        "capexOpen": 5,
+        "byDept": {
+          "recreation": {
+            "open": 9,
+            "overdue": 2,
+            "closed": 10,
+            "closedOnTime": 8,
+            "stepsIn10": 9.1,
+            "resultGoodIn10": 8.0,
+            "daysToFix": 3.2
+          },
+          "housekeeping": {
+            "open": 10,
+            "overdue": 3,
+            "closed": 12,
+            "closedOnTime": 10,
+            "stepsIn10": 9.3,
+            "resultGoodIn10": 7.8,
+            "daysToFix": 4.0
+          }
+        }
       },
       {
         "week": -2,
-        "open": 17,
+        "open": 19,
         "overdue": 5,
         "safetyOpen": 2,
         "closed": 20,
@@ -922,11 +1106,33 @@
         "stepsIn10": 9.3,
         "resultGoodIn10": 8.1,
         "oldPer100": 1.6,
-        "renovatedPer100": 1.0
+        "renovatedPer100": 1.0,
+        "daysToFix": 3.4,
+        "capexOpen": 5,
+        "byDept": {
+          "recreation": {
+            "open": 9,
+            "overdue": 2,
+            "closed": 9,
+            "closedOnTime": 8,
+            "stepsIn10": 9.2,
+            "resultGoodIn10": 8.2,
+            "daysToFix": 3.0
+          },
+          "housekeeping": {
+            "open": 10,
+            "overdue": 3,
+            "closed": 11,
+            "closedOnTime": 9,
+            "stepsIn10": 9.4,
+            "resultGoodIn10": 8.0,
+            "daysToFix": 3.8
+          }
+        }
       },
       {
         "week": -1,
-        "open": 16,
+        "open": 18,
         "overdue": 4,
         "safetyOpen": 3,
         "closed": 23,
@@ -934,8 +1140,41 @@
         "stepsIn10": 9.4,
         "resultGoodIn10": 8.2,
         "oldPer100": 1.5,
-        "renovatedPer100": 1.1
+        "renovatedPer100": 1.1,
+        "daysToFix": 3.1,
+        "capexOpen": 6,
+        "byDept": {
+          "recreation": {
+            "open": 8,
+            "overdue": 2,
+            "closed": 10,
+            "closedOnTime": 9,
+            "stepsIn10": 9.3,
+            "resultGoodIn10": 8.3,
+            "daysToFix": 2.7
+          },
+          "housekeeping": {
+            "open": 10,
+            "overdue": 2,
+            "closed": 13,
+            "closedOnTime": 11,
+            "stepsIn10": 9.5,
+            "resultGoodIn10": 8.1,
+            "daysToFix": 3.5
+          }
+        }
       }
-    ]
+    ],
+    "buildingsLast12Weeks": {
+      "_note": "Room problems reported per 100 rooms over the last 12 weeks, by building. Made up.",
+      "1000": 9.7,
+      "2000": 3.9,
+      "3000": 4.4,
+      "4000": 8.1,
+      "5000": 3.1,
+      "6000": 10.6,
+      "7000": 2.8,
+      "8000": 3.6
+    }
   }
 }
