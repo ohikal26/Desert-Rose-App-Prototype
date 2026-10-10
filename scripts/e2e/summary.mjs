@@ -10,7 +10,7 @@ for (const [lang, vp, name] of [['en', { width: 360, height: 640 }, 'phone'], ['
   for (const [hash, label] of [['#/summary', 'summary'], ['#/qr-sheet', 'qr']]) {
     await page.goto('http://localhost:4179/' + hash); await page.reload()
     await page.locator('h1:visible').first().waitFor(); await page.waitForTimeout(600)
-    await page.screenshot({ path: `${out}/${name}-${lang}-${label}.png`, fullPage: true })
+    if (out) await page.screenshot({ path: `${out}/${name}-${lang}-${label}.png`, fullPage: true })
   }
   // Tile taps open the filtered list
   await page.goto('http://localhost:4179/#/summary'); await page.locator('h1:visible').first().waitFor()
