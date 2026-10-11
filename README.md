@@ -65,7 +65,7 @@ Before the demo: open **Settings → Reset demo data**. Stay in English, or swit
 
 **Directors (optional, 1 minute)** Pick **Amr** (Director of Recreation) or **Rania** (Director of Housekeeping). Their home is the department overview, looked at every morning and in the weekly department meeting: safety, today's checklists (done, sent back, not started), fixes nobody has checked for over a day, how long open problems have waited, where problems cluster, the 9-week trend, typical days to fix, both inspection totals, and the department's capex items. Counts are by place and kind, never by person. The managers Tarek and Laila report to them.
 
-**Leadership page (optional, 1 minute)** Pick **Samir** and tap **Leadership view**, or pick **CEO** or **Owner** from the name menu. Three tabs show what each person looks at, and how often:
+**Leadership page (optional, 1 minute)** Pick **Samir** and tap **Leadership view**, or pick **CEO** or **Fady** (Owner's representative) from the name menu. Three tabs show what each person looks at, and how often:
 - **GM**, every morning: safety now; each department today, with places not started and a link to each department overview; overdue problems that need a push; fixes nobody has checked; how long problems have waited; where problems cluster; inspections this week.
 - **CEO**, a daily glance plus the weekly trend: safety and overdue against last week, things worth a question, open and overdue over 9 weeks, the two inspection totals, care against condition, open problems by department, and how fast problems get fixed.
 - **Owner**, weekly: safety in one line, the capex list by building and over time, room problems per 100 rooms by building, each department in one line, and progress toward 2031.
