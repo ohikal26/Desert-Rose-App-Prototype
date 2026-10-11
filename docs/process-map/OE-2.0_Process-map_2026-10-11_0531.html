@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>OE 2.0: how it works</title>
+<style>
+@font-face { font-family: 'Tenor Sans'; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/tenor-sans/files/tenor-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-400-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 700; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-700-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-weight: 800; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-800-normal.woff2'); }
+@font-face { font-family: 'Nunito Sans'; font-style: italic; font-weight: 400; src: url('file:///home/user/Desert-Rose-App-Prototype/node_modules/@fontsource/nunito-sans/files/nunito-sans-latin-400-italic.woff2'); }
+@page { size: A4 landscape; margin: 0; }
+:root { --teal: #2B7582; --teal-bg: #E3EEF0; --orange: #E05E27; --orange-bg: #FBE8DF; --stone: #A44E3A; --pearl: #E8E3DB; --page: #FAF8F4; --ink: #1F2A2E; --grey: #5F676B; --line: #DDD6CA; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: 'Nunito Sans', Arial, sans-serif; color: var(--ink); font-size: 9.4pt; line-height: 1.32; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 297mm; height: 210mm; padding: 10mm 12mm 8mm; position: relative; page-break-after: always; overflow: hidden; background: #fff; }
+.page:last-child { page-break-after: auto; }
+.top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1.5px solid var(--teal); padding-bottom: 5px; margin-bottom: 8px; }
+.top img { height: 15mm; }
+.eyebrow { font-size: 8pt; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); font-weight: 800; }
+h1 { font-family: 'Tenor Sans', serif; font-weight: 400; color: var(--teal); font-size: 21pt; margin: 1px 0 0; line-height: 1.1; }
+h2 { font-family: 'Tenor Sans', serif; font-weight: 400; color: var(--teal); font-size: 12.5pt; margin: 0 0 5px; }
+h3 { font-size: 9.6pt; font-weight: 800; margin: 0 0 2px; }
+.muted { color: var(--grey); }
+.foot { position: absolute; left: 12mm; right: 12mm; bottom: 5mm; display: flex; justify-content: space-between; font-size: 7.4pt; color: var(--grey); border-top: 1px solid var(--line); padding-top: 3px; }
+/* page 1 */
+.aim { background: var(--teal); color: #fff; border-radius: 6px; padding: 9px 13px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; margin-bottom: 8px; }
+.aim .k { font-size: 7.8pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; opacity: .85; }
+.aim .s { font-family: 'Tenor Sans', serif; font-size: 13.5pt; line-height: 1.25; margin-top: 2px; }
+.aim .q { font-style: italic; font-size: 8.4pt; max-width: 66mm; border-left: 1px solid rgba(255,255,255,.5); padding-left: 10px; }
+.goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 8px; }
+.goal { border: 1px solid var(--line); border-top: 3px solid var(--orange); border-radius: 4px; padding: 5px 7px; background: var(--page); }
+.goal b { display: block; font-size: 9.4pt; }
+table.fg { width: 100%; border-collapse: separate; border-spacing: 0; }
+table.fg th { text-align: left; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px; color: #fff; }
+table.fg th.today { background: var(--stone); border-radius: 4px 0 0 0; }
+table.fg th.arrow { background: var(--pearl); color: var(--ink); width: 6mm; padding: 0; }
+table.fg th.new { background: var(--teal); border-radius: 0 4px 0 0; }
+table.fg th.area { background: var(--ink); width: 30mm; border-radius: 4px 0 0 0; }
+table.fg td { padding: 3.2px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.fg td.area { font-weight: 800; color: var(--teal); }
+table.fg td.today { background: #FBF4F1; }
+table.fg td.arrow { background: var(--pearl); text-align: center; color: var(--grey); font-weight: 800; padding: 3px 0; }
+table.fg td.new { background: #F1F7F8; }
+table.fg td small { color: var(--grey); }
+.keep { margin-top: 6px; font-size: 8.6pt; }
+.keep b { color: var(--teal); }
+/* page 2 */
+.cycle { display: flex; gap: 3px; margin-bottom: 7px; }
+.cycle span { flex: 1; text-align: center; font-size: 7.6pt; font-weight: 800; letter-spacing: .08em; padding: 4px 0; background: var(--pearl); color: var(--grey); clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%, 6px 50%); }
+.cycle span.on { background: var(--teal); color: #fff; }
+.cycle span.app { background: var(--orange); color: #fff; }
+.band { border: 1px solid var(--line); border-radius: 5px; padding: 6px 9px; margin-bottom: 4px; background: var(--page); }
+.band.loop { border: 1.5px solid var(--orange); background: #fff; }
+.bh { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.bh .stage { font-size: 7.4pt; font-weight: 800; letter-spacing: .1em; color: #fff; background: var(--teal); padding: 1px 6px; border-radius: 3px; }
+.band.loop .bh .stage { background: var(--orange); }
+.bh h2 { margin: 0; font-size: 11.5pt; }
+.row { display: flex; align-items: stretch; }
+.box { flex: 1; border: 1px solid var(--line); border-radius: 4px; padding: 4px 7px; background: #fff; font-size: 9.2pt; }
+.box b { display: block; font-size: 9pt; color: var(--ink); }
+.box i { display: block; color: var(--teal); font-size: 8pt; margin-bottom: 1px; }
+.loop .box.step { background: var(--orange-bg); border-color: #F2C3AE; }
+.ar { flex: 0 0 16px; display: flex; align-items: center; justify-content: center; color: var(--orange); font-weight: 800; font-size: 11pt; }
+.gap { flex: 0 0 5px; }
+.dn { text-align: center; color: var(--orange); font-weight: 800; font-size: 8.6pt; margin: 0 0 4px; letter-spacing: .03em; }
+.side { display: flex; gap: 5px; margin-top: 4px; }
+.side .box { border-style: dashed; }
+.rules { font-size: 8.8pt; margin-top: 3px; }
+.rules b { color: var(--teal); }
+.aim .s { font-size: 12pt; }
+.goal { font-size: 8.8pt; }
+table.fg td { padding: 2.4px 8px; font-size: 8.8pt; line-height: 1.27; }
+table.fg th.today, table.fg td.today { width: 44%; }
+.keep { font-size: 8.4pt; margin-top: 4px; }
+.box { font-size: 8.8pt; }
+.rules { font-size: 8.4pt; }
+</style></head><body>
+<section class="page">
+<div class="top"><div><div class="eyebrow">Organizational Excellence · OE 2.0</div><h1>From people protecting performance to systems protecting performance</h1></div><img src="file:///home/user/Desert-Rose-App-Prototype/assets/DR_logo_primary.png" alt="Desert Rose"></div>
+<div class="aim"><div><div class="k">The aim</div>
+<div class="s">Every finding, whether it comes from a shift checklist, an audit or a guest, should end with one owner, a due date and a fix that someone else has actually checked. Leaders should then see where it stands the next morning, in the Excellence Gateway.</div></div>
+<div class="q">"We can't measure what we can't observe, and we can't manage what we can't measure."<br><span style="opacity:.8">OE slogan, 2014</span></div></div>
+<div class="goals">
+<div class="goal"><b>Strengthen Assign and Follow up</b>We are already good at capturing and measuring. The weak part is what happens in between.</div>
+<div class="goal"><b>One list, one standard</b>Today follow-up lives in WhatsApp groups, on paper and in people's heads, so it depends on who is on shift.</div>
+<div class="goal"><b>Honest numbers</b>Scores should show what needs action, and come straight from the work rather than from someone retyping it.</div>
+<div class="goal"><b>The same words everywhere</b>The room attendant's phone, the Morning Briefing and the OKR report should all call things by the same name.</div>
+</div>
+<table class="fg"><tr><th class="area">Area</th><th class="today">What we are fixing (today)</th><th class="arrow"></th><th class="new">What we gain (OE 2.0)</th></tr><tr><td class="area">Follow-up</td><td class="today">Problems get followed up on WhatsApp and on paper, which means nobody can really say what is still open.</td><td class="arrow">→</td><td class="new">One list for every problem, each with a photo, one owner and a due date. If it slips past the due date, it shows as overdue without anyone having to chase it.</td></tr><tr><td class="area">Audits</td><td class="today">Audits are done on paper and typed up later. The due-date column is empty on every quality sheet, and nobody is named as owner.</td><td class="arrow">→</td><td class="new">OE audits happen on the phone, with photos, and any finding can become an action with an owner and a due date right there.</td></tr><tr><td class="area">Repeated findings</td><td class="today">The same findings keep coming back ("Repeated", "despite general cleaning"), and some orders get marked done when the work wasn't.</td><td class="arrow">→</td><td class="new">A fix only counts once someone other than the person who did it has checked it. Places where problems keep coming back get flagged.</td></tr><tr><td class="area">Shift standards</td><td class="today">Most teams don't have a shift checklist, and the audits often say "no closing check".</td><td class="arrow">→</td><td class="new">Each place has a short shift checklist, opened with a QR code and checked by the supervisor.</td></tr><tr><td class="area">Guest concerns</td><td class="today">Departmental Concerns and Exclusivi alerts reach the department quickly, but what happens after that isn't really tracked.</td><td class="arrow">→</td><td class="new">"Add as a problem" turns a guest concern into an action in the same list, so we can see when it is actually fixed.</td></tr><tr><td class="area">HSSE</td><td class="today">Some serious safety findings sit outside the score ("Max 0"), so they are easy to miss.</td><td class="arrow">→</td><td class="new">Safety problems always sit at the top of every list and need a temporary measure first, and the GM and Owner can see how many are open.</td></tr><tr><td class="area">OKR scorecard</td><td class="today">It is quite forgiving. "On Track" starts at 90%, and water use reads On Track even when it is over the limit.</td><td class="arrow">→</td><td class="new">Four clear statuses (Met, Close, Behind, At risk), and a limit is treated as a limit.</td></tr><tr><td class="area">Reports</td><td class="today">A lot of the data is built by hand in spreadsheets, with typed-over values, #REF! cells and labels that change from file to file.</td><td class="arrow">→</td><td class="new">The numbers come from the work people actually do in the app, so nobody retypes anything and the Morning Briefing runs on today's data.</td></tr><tr><td class="area">Bonuses (next step)</td><td class="today">Department scores include resort rows copied onto every sheet, and some guest scores depend on who we ask to leave a review.</td><td class="arrow">→</td><td class="new">A draft scorecard with a few outcome KPIs per department, taken only from sources we trust. I think it should never count problems reported or checklists ticked, because that rewards hiding problems.</td></tr></table>
+<p class="keep"><b>What stays the same:</b> the Excellence Gateway and its four pillars (Financial, Operational, Guest experience, People &amp; Culture), the Morning Briefing, OKRs, Exclusivi alerts and the monthly reports. None of that goes away. OE 2.0 adds the part that is missing today, which is the link between finding a problem and actually fixing it.</p>
+<div class="foot"><span>Sources: OE Body of Knowledge (Oct 2026), Excellence Gateway executive paper, August 2026 Quality and OKR reports, Strategic Plan 2026.</span><span>Prototype with made-up data · 11 October 2026 · Page 1 of 2</span></div>
+</section>
+<section class="page">
+<div class="top"><div><div class="eyebrow">Organizational Excellence · OE 2.0</div><h1>How it works</h1></div><img src="file:///home/user/Desert-Rose-App-Prototype/assets/DR_logo_primary.png" alt="Desert Rose"></div>
+<div class="cycle"><span class="app">CAPTURE</span><span class="on">INTEGRATE</span><span class="on">ANALYSE</span><span class="on">ALERT</span><span class="app">ASSIGN</span><span class="app">FOLLOW UP</span><span class="on">MEASURE</span><span class="on">LEARN</span></div>
+<p class="muted" style="margin:-3px 0 6px;font-size:8pt"><span style="color:var(--orange);font-weight:800">Orange</span> is where the OE app does the work, and <span style="color:var(--teal);font-weight:800">teal</span> is where the Excellence Gateway does it. It is the same management cycle we use today.</p>
+<div class="band"><div class="bh"><span class="stage">CAPTURE</span><h2>Where findings come from</h2></div><div class="row">
+<div class="box"><b>Shift checklists</b><i>Line staff: pool &amp; beach attendant, room attendant</i>Staff scan the QR code at the place and tick each item, or mark it "could not do". They can report a problem from any item, with a photo.</div><div class="gap"></div>
+<div class="box"><b>OE audits</b><i>Quality team, on the move</i>Each item gets two marks: were the steps followed, and is the result good? Any finding can become a problem, and the note and photo come with it.</div><div class="gap"></div>
+<div class="box"><b>Guest concerns</b><i>Departmental Concerns, Exclusivi, review platforms</i>In the Morning Briefing, "Add as a problem" fills in the place, the type and the guest's own words.</div><div class="gap"></div>
+<div class="box"><b>Seen on the spot</b><i>Anyone, including the MOD round</i>What it is, where, a photo, whether it is condition or care, and whether it is a safety risk.</div>
+</div></div>
+<div class="dn">↓ EVERYTHING GOES INTO ONE PROBLEM LIST, WITH ONE SET OF RULES ↓</div>
+<div class="band loop"><div class="bh"><span class="stage">ASSIGN · FOLLOW UP</span><h2>The problem loop</h2></div><div class="row">
+<div class="box step"><b>Reported</b>Place, photo and type. If it is a safety risk, a temporary measure comes first.</div><div class="ar">→</div>
+<div class="box step"><b>Assigned</b><i>Supervisor, department head or OE</i>It gets one owner and a due date, and shows up on the owner's badge.</div><div class="ar">→</div>
+<div class="box step"><b>Fixed</b><i>The owner</i>The owner does the work and marks it fixed.</div><div class="ar">→</div>
+<div class="box step"><b>Confirmed</b><i>Someone else for that area</i>Never the person who fixed it. If it isn't really fixed, it goes back to the owner.</div><div class="ar">→</div>
+<div class="box step"><b>Closed</b>It counts toward "closed on time" and how many days fixes take.</div>
+</div><div class="side">
+<div class="box"><b>Overdue</b>Happens on its own once the due date passes, and shows in red to the owner and to leaders.</div>
+<div class="box"><b>CAPEX list</b>Only for condition problems in old areas. It leaves the team's count and moves to the Owner's list.</div>
+<div class="box"><b>Checklist sent back</b>The supervisor confirms each finished checklist, or sends it back with a note.</div>
+<div class="box"><b>Works offline</b>Everything saves on the phone, so a weak signal doesn't lose anyone's work.</div>
+</div></div>
+<div class="dn">↓ THE SAME COUNTS AND WORDS FEED EVERY VIEW ↓</div>
+<div class="band"><div class="bh"><span class="stage">MEASURE · LEARN</span><h2>Who looks at what, and when</h2></div><div class="row">
+<div class="box"><b>Supervisor</b><i>Through the shift</i>Checklists to confirm, fixes to confirm and problems to assign.</div><div class="ar">→</div>
+<div class="box"><b>Director</b><i>Every morning</i>The department overview: safety, today's checklists, fixes nobody has checked yet, how long problems have waited and where they keep clustering.</div><div class="ar">→</div>
+<div class="box"><b>Morning Briefing</b><i>GM and each department, daily</i>One page per department, with KPIs against target, today in the OE app, yesterday's and MTD guest concerns, and what needs discussing.</div><div class="ar">→</div>
+<div class="box"><b>GM, CEO, Owner</b><i>GM daily · CEO daily and weekly · Owner weekly</i>Safety, what needs a push, the weekly trend and the CAPEX list.</div><div class="ar">→</div>
+<div class="box"><b>Excellence Gateway</b><i>Monthly OKR cycle</i>The four pillars, each KPI against target (Met, Close, Behind, At risk), and a draft scorecard for future bonuses.</div>
+</div>
+<p class="rules"><b>Back into the loop:</b> anything raised in a briefing or by a leader is added as a problem with an owner and a due date, and followed up like everything else. <b>The rules:</b> safety first, one owner per problem, nobody confirms their own fix, overdue happens on its own, and we count by place, never by person. In Arabic and English.</p></div>
+<div class="foot"><span>This prototype runs on made-up data. Whatever tool we buy needs to do the same.</span><span>11 October 2026 · Page 2 of 2</span></div>
+</section>
+</body></html>
