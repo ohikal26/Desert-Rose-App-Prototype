@@ -37,9 +37,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # The repository's Pages setting also runs GitHub's automatic "pages build and deployment"
-      # on every push, which publishes the unbuilt source (a blank page). Wait so this
-      # deploy always lands last. Permanent fix: Settings → Pages → Source: "GitHub Actions".
-      - run: sleep 90
       - id: deployment
         uses: actions/deploy-pages@v4
